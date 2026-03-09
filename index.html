@@ -21,7 +21,7 @@
   --r:8px;
 }
 
-html,body { height:100%; font-family:var(--sans); background:var(--paper); color:var(--text); }
+html,body { height:100%; width:100%; font-family:var(--sans); background:var(--paper); color:var(--text); margin:0; padding:0; }
 
 /* SPLASH */
 #splash {
@@ -68,188 +68,335 @@ html,body { height:100%; font-family:var(--sans); background:var(--paper); color
 .sp-btn svg{transition:transform .3s;}
 .sp-btn:hover svg{transform:translateX(4px);}
 
-/* APP SHELL - MOBILE FIRST */
+/* APP LAYOUT - VERTICAL STACK */
 #app{
-  display:flex; flex-direction:column; height:100vh; width:100vw; opacity:0; transition:opacity .8s ease .1s;
+  display:flex;
+  flex-direction:column;
+  height:100vh;
+  width:100vw;
+  opacity:0;
+  transition:opacity .8s ease .1s;
   overflow:hidden;
 }
 
 /* HEADER */
 .header{
-  background:var(--white); border-bottom:1px solid var(--border);
-  padding:14px 16px; flex-shrink:0;
-  display:flex; align-items:center; justify-content:space-between;
+  background:var(--white);
+  border-bottom:1px solid var(--border);
+  padding:12px 16px;
+  flex-shrink:0;
+  box-shadow:0 1px 3px rgba(0,0,0,.05);
 }
-.header-back{
-  background:none; border:none; cursor:pointer; font-size:1.2rem;
-  padding:4px 8px; color:var(--text); transition:all .2s;
-}
-.header-back:hover{background:var(--border); border-radius:var(--r);}
-.header-back.hidden{display:none;}
 .header-title{
-  font-family:var(--serif); font-size:1.1rem; font-weight:600;
-  flex:1; text-align:center;
-}
-.header-search{
-  width:30px; height:30px; background:none; border:none;
-  color:var(--muted); cursor:pointer; font-size:1rem;
+  font-family:var(--serif);
+  font-size:1.2rem;
+  font-weight:600;
+  color:var(--text);
 }
 
-/* SEARCH BOX */
-.search-container{
-  display:none; background:var(--white); padding:12px 16px;
-  border-bottom:1px solid var(--border); flex-shrink:0;
+/* CONTENT AREA - SCROLLABLE */
+.content-wrapper{
+  flex:1;
+  overflow-y:auto;
+  overflow-x:hidden;
+  display:flex;
+  flex-direction:column;
 }
-.search-container.show{display:block;}
-.search-input{
-  width:100%; padding:10px 12px; border:1px solid var(--border);
-  border-radius:var(--r); font-family:var(--sans); font-size:.9rem;
-  outline:none; transition:border-color .2s;
-}
-.search-input:focus{border-color:var(--blue2);}
 
-/* CONTENT CONTAINER */
-.content{
-  flex:1; overflow-y:auto; padding:16px;
-  opacity:1; transform:translateY(0); transition:opacity .4s ease, transform .4s ease;
+.page-content{
+  padding:16px;
+  opacity:1;
+  transform:translateY(0);
+  transition:opacity .3s ease, transform .3s ease;
+  animation:pageSlideIn .4s ease;
 }
-.content.fade-out{opacity:0; transform:translateY(20px); pointer-events:none;}
 
-/* PAGE TITLE & COUNT */
+.page-content.fade-out{
+  opacity:0;
+  transform:translateY(20px);
+  pointer-events:none;
+}
+
+@keyframes pageSlideIn{
+  from{ opacity:0; transform:translateY(20px); }
+  to{ opacity:1; transform:translateY(0); }
+}
+
+/* PAGE HEADER */
 .page-header{
-  margin-bottom:20px;
-  display:flex; align-items:baseline; gap:12px;
-}
-.page-title{
-  font-family:var(--serif); font-size:1.3rem; font-weight:400;
-}
-.page-count{
-  font-family:var(--mono); font-size:.65rem; letter-spacing:.08em;
-  color:var(--muted); background:var(--border); padding:4px 10px;
-  border-radius:99px;
+  margin-bottom:16px;
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
 
-/* LIST ITEMS */
+.page-title{
+  font-family:var(--serif);
+  font-size:1.3rem;
+  font-weight:400;
+  color:var(--text);
+}
+
+.page-count{
+  font-family:var(--mono);
+  font-size:.6rem;
+  letter-spacing:.08em;
+  color:var(--muted);
+  background:var(--border);
+  padding:4px 8px;
+  border-radius:99px;
+  margin-left:auto;
+}
+
+/* LIST CONTAINER */
 .list-container{
-  display:flex; flex-direction:column; gap:10px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
 }
 
 /* SCHEDULE ITEM */
 .schedule-item{
-  background:var(--white); border:1px solid var(--border);
-  border-radius:var(--r); overflow:hidden;
-  transition:all .2s; padding:0;
-  display:flex; flex-direction:column;
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:var(--r);
+  overflow:hidden;
+  transition:all .2s;
+  padding:0;
 }
-.schedule-item:active{background:rgba(126,207,234,.02);}
+.schedule-item:active{
+  background:rgba(126,207,234,.02);
+  box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
 .schedule-header{
   background:linear-gradient(135deg,var(--navy),#1a4a7a);
-  color:#fff; padding:12px 14px;
-  display:flex; flex-direction:column; gap:4px;
+  color:#fff;
+  padding:10px 12px;
+  display:flex;
+  flex-direction:column;
+  gap:3px;
 }
 .schedule-day{
-  font-family:var(--mono); font-size:.65rem; letter-spacing:.1em;
-  text-transform:uppercase; color:var(--sky);
+  font-family:var(--mono);
+  font-size:.6rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--sky);
 }
 .schedule-time{
-  font-family:var(--mono); font-size:.75rem; color:rgba(255,255,255,.7);
+  font-family:var(--mono);
+  font-size:.75rem;
+  color:rgba(255,255,255,.8);
 }
 .schedule-body{
-  padding:12px 14px;
+  padding:10px 12px;
 }
 .schedule-course{
-  font-family:var(--serif); font-size:.95rem; margin-bottom:4px; font-weight:500;
+  font-family:var(--serif);
+  font-size:.95rem;
+  margin-bottom:5px;
+  font-weight:500;
 }
 .schedule-room{
-  font-family:var(--mono); font-size:.7rem; color:var(--muted);
-  display:inline-block; background:var(--border); padding:3px 8px;
-  border-radius:3px; margin-top:6px;
+  font-family:var(--mono);
+  font-size:.65rem;
+  color:var(--muted);
+  display:inline-block;
+  background:var(--border);
+  padding:3px 8px;
+  border-radius:3px;
 }
 
 /* MEMBER ITEM */
 .member-item{
-  background:var(--white); border:1px solid var(--border);
-  border-radius:var(--r); padding:12px 14px;
-  display:flex; align-items:center; gap:12px;
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:var(--r);
+  padding:12px;
+  display:flex;
+  align-items:center;
+  gap:12px;
   transition:all .2s;
 }
-.member-item:active{background:rgba(126,207,234,.02);}
+.member-item:active{
+  background:rgba(126,207,234,.02);
+  box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
 .member-avatar{
-  width:44px; height:44px; border-radius:50%;
+  width:44px;
+  height:44px;
+  border-radius:50%;
   background:linear-gradient(135deg,var(--navy),var(--blue));
-  display:flex; align-items:center; justify-content:center;
-  font-family:var(--mono); font-size:.85rem; color:#fff;
-  font-weight:600; flex-shrink:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:var(--mono);
+  font-size:.8rem;
+  color:#fff;
+  font-weight:600;
+  flex-shrink:0;
 }
 .member-info{
-  flex:1; min-width:0;
+  flex:1;
+  min-width:0;
 }
 .member-name{
-  font-size:.9rem; font-weight:600; color:var(--text);
-  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  font-size:.9rem;
+  font-weight:600;
+  color:var(--text);
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
 }
 .member-id{
-  font-family:var(--mono); font-size:.65rem; color:var(--muted);
+  font-family:var(--mono);
+  font-size:.65rem;
+  color:var(--muted);
   margin-top:2px;
 }
 
 /* PRACTICUM ITEM */
 .practicum-item{
-  background:var(--white); border:1px solid var(--border);
-  border-radius:var(--r); padding:12px 14px;
-  display:flex; gap:12px;
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:var(--r);
+  padding:12px;
   transition:all .2s;
 }
-.practicum-item:active{background:rgba(126,207,234,.02);}
-.practicum-icon{
-  font-size:2rem; flex-shrink:0;
+.practicum-item:active{
+  background:rgba(126,207,234,.02);
+  box-shadow:0 2px 8px rgba(0,0,0,.08);
 }
-.practicum-info{
-  flex:1;
+.practicum-top{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:8px;
+}
+.practicum-icon{
+  font-size:1.8rem;
+  flex-shrink:0;
 }
 .practicum-course{
-  font-size:.9rem; font-weight:600; color:var(--text);
-  margin-bottom:4px;
+  font-size:.9rem;
+  font-weight:600;
+  color:var(--text);
 }
-.practicum-time{
-  font-family:var(--mono); font-size:.7rem; color:var(--muted);
+.practicum-bottom{
+  display:flex;
+  gap:16px;
+  flex-wrap:wrap;
+  padding-left:32px;
+}
+.practicum-time,
+.practicum-day{
+  font-family:var(--mono);
+  font-size:.7rem;
+  color:var(--muted);
 }
 .practicum-day{
-  font-family:var(--mono); font-size:.7rem; color:var(--sky);
-  margin-top:4px;
+  color:var(--sky);
 }
 
 /* EMPTY STATE */
 .empty-state{
-  text-align:center; padding:40px 20px; color:var(--muted);
-  font-style:italic; font-size:.9rem;
+  text-align:center;
+  padding:40px 20px;
+  color:var(--muted);
+  font-style:italic;
+  font-size:.9rem;
 }
 
-/* BOTTOM NAV */
-.bottom-nav{
-  background:var(--white); border-top:1px solid var(--border);
-  display:flex; justify-content:space-around; padding:8px 0;
+/* SEARCH BOX */
+.search-box{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  background:var(--paper);
+  border:1px solid var(--border);
+  border-radius:var(--r);
+  padding:8px 12px;
+  margin:16px 16px 0 16px;
+  transition:all .2s;
+}
+.search-box:focus-within{
+  border-color:var(--blue2);
+  background:var(--white);
+}
+.search-box svg{
+  color:var(--muted);
   flex-shrink:0;
+  width:16px;
+  height:16px;
 }
+.search-box input{
+  border:none;
+  background:transparent;
+  font-family:var(--sans);
+  font-size:.85rem;
+  color:var(--text);
+  outline:none;
+  flex:1;
+}
+.search-box input::placeholder{
+  color:var(--muted);
+}
+
+/* BOTTOM NAVIGATION */
+.bottom-nav{
+  background:var(--white);
+  border-top:1px solid var(--border);
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:0;
+  padding:0;
+  flex-shrink:0;
+  box-shadow:0 -1px 3px rgba(0,0,0,.05);
+}
+
 .nav-btn{
-  flex:1; padding:12px 8px; background:none; border:none;
-  cursor:pointer; display:flex; flex-direction:column;
-  align-items:center; gap:4px; color:var(--muted);
-  font-family:var(--mono); font-size:.6rem; letter-spacing:.05em;
-  text-transform:uppercase; transition:all .2s;
-  position:relative;
+  padding:12px 0;
+  background:none;
+  border:none;
+  cursor:pointer;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:4px;
+  color:var(--muted);
+  font-family:var(--mono);
+  font-size:.55rem;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+  transition:all .2s;
+  border-top:3px solid transparent;
 }
-.nav-btn.active{color:var(--blue);}
-.nav-btn.active::after{
-  content:''; position:absolute; top:0; left:0; right:0;
-  height:3px; background:var(--blue);
+
+.nav-btn:active{
+  background:rgba(126,207,234,.05);
 }
-.nav-icon{font-size:1.3rem;}
+
+.nav-btn.active{
+  color:var(--blue);
+  border-top-color:var(--blue);
+}
+
+.nav-icon{
+  font-size:1.4rem;
+}
 
 /* SCROLLBAR */
-::-webkit-scrollbar{width:4px;}
-::-webkit-scrollbar-track{background:transparent;}
-::-webkit-scrollbar-thumb{background:var(--border); border-radius:99px;}
+::-webkit-scrollbar{
+  width:4px;
+}
+::-webkit-scrollbar-track{
+  background:transparent;
+}
+::-webkit-scrollbar-thumb{
+  background:var(--border);
+  border-radius:99px;
+}
+
 </style>
 </head>
 <body>
@@ -328,19 +475,20 @@ html,body { height:100%; font-family:var(--sans); background:var(--paper); color
 <div id="app">
   <!-- HEADER -->
   <div class="header">
-    <button class="header-back hidden" id="backBtn">← Kembali</button>
     <div class="header-title" id="headerTitle">Jadwal Kuliah</div>
-    <button class="header-search" id="searchBtn">🔍</button>
   </div>
 
   <!-- SEARCH -->
-  <div class="search-container" id="searchContainer">
-    <input type="text" class="search-input" id="searchInput" placeholder="Cari..." autocomplete="off"/>
+  <div class="search-box">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" id="searchInput" placeholder="Cari..." autocomplete="off"/>
   </div>
 
   <!-- CONTENT -->
-  <div class="content" id="content">
-    <!-- Will be populated by JavaScript -->
+  <div class="content-wrapper">
+    <div class="page-content" id="pageContent">
+      <!-- Akan diisi oleh JavaScript -->
+    </div>
   </div>
 
   <!-- BOTTOM NAVIGATION -->
@@ -416,8 +564,7 @@ function renderSchedule(q=''){
     s.course.toLowerCase().includes(q) || s.day.toLowerCase().includes(q) || s.room.toLowerCase().includes(q)
   );
   
-  const content = document.getElementById('content');
-  content.innerHTML = `
+  const html = `
     <div class="page-header">
       <h1 class="page-title">Jadwal Kuliah</h1>
       <span class="page-count">${filtered.length}</span>
@@ -437,6 +584,8 @@ function renderSchedule(q=''){
       `).join('') : '<div class="empty-state">Tidak ada jadwal ditemukan.</div>'}
     </div>
   `;
+  
+  updateContent(html);
 }
 
 function renderMembers(q=''){
@@ -444,8 +593,7 @@ function renderMembers(q=''){
     m.name.toLowerCase().includes(q) || m.id.includes(q)
   );
   
-  const content = document.getElementById('content');
-  content.innerHTML = `
+  const html = `
     <div class="page-header">
       <h1 class="page-title">Anggota Kelas</h1>
       <span class="page-count">${filtered.length}</span>
@@ -462,6 +610,8 @@ function renderMembers(q=''){
       `).join('') : '<div class="empty-state">Tidak ada mahasiswa ditemukan.</div>'}
     </div>
   `;
+  
+  updateContent(html);
 }
 
 function renderPracticum(q=''){
@@ -469,8 +619,7 @@ function renderPracticum(q=''){
     p.course.toLowerCase().includes(q) || p.day.toLowerCase().includes(q)
   );
   
-  const content = document.getElementById('content');
-  content.innerHTML = `
+  const html = `
     <div class="page-header">
       <h1 class="page-title">Jadwal Praktikum</h1>
       <span class="page-count">${filtered.length}</span>
@@ -478,66 +627,61 @@ function renderPracticum(q=''){
     <div class="list-container">
       ${filtered.length ? filtered.map(p => `
         <div class="practicum-item">
-          <div class="practicum-icon">🔬</div>
-          <div class="practicum-info">
+          <div class="practicum-top">
+            <div class="practicum-icon">🔬</div>
             <div class="practicum-course">${p.course}</div>
-            <div class="practicum-time">${p.time}</div>
-            <div class="practicum-day">${p.day} • Setiap Minggu</div>
+          </div>
+          <div class="practicum-bottom">
+            <div class="practicum-time">⏱️ ${p.time}</div>
+            <div class="practicum-day">📅 ${p.day}</div>
           </div>
         </div>
       `).join('') : '<div class="empty-state">Tidak ada praktikum ditemukan.</div>'}
     </div>
   `;
+  
+  updateContent(html);
+}
+
+function updateContent(html){
+  const pageContent = document.getElementById('pageContent');
+  pageContent.classList.add('fade-out');
+  
+  setTimeout(() => {
+    pageContent.innerHTML = html;
+    pageContent.classList.remove('fade-out');
+  }, 150);
 }
 
 // PAGE SWITCHING
 function switchPage(page){
   if(page === currentPage) return;
   
-  // Fade out
-  const content = document.getElementById('content');
-  content.classList.add('fade-out');
+  currentPage = page;
   
-  setTimeout(() => {
-    currentPage = page;
-    
-    // Update header
-    const titles = {
-      schedule: 'Jadwal Kuliah',
-      members: 'Anggota Kelas',
-      practicum: 'Jadwal Praktikum'
-    };
-    document.getElementById('headerTitle').textContent = titles[page];
-    
-    // Render new page
-    if(page === 'schedule') renderSchedule(searchQuery);
-    else if(page === 'members') renderMembers(searchQuery);
-    else if(page === 'practicum') renderPracticum(searchQuery);
-    
-    // Fade in
-    content.classList.remove('fade-out');
-    
-    // Update nav buttons
-    document.querySelectorAll('.nav-btn').forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.page === page);
-    });
-    
-    // Close search
-    document.getElementById('searchContainer').classList.remove('show');
-    document.getElementById('searchInput').value = '';
-    searchQuery = '';
-  }, 200);
+  const titles = {
+    schedule: 'Jadwal Kuliah',
+    members: 'Anggota Kelas',
+    practicum: 'Jadwal Praktikum'
+  };
+  
+  document.getElementById('headerTitle').textContent = titles[page];
+  
+  // Scroll ke atas
+  document.querySelector('.content-wrapper').scrollTop = 0;
+  
+  // Render halaman
+  if(page === 'schedule') renderSchedule(searchQuery);
+  else if(page === 'members') renderMembers(searchQuery);
+  else if(page === 'practicum') renderPracticum(searchQuery);
+  
+  // Update nav
+  document.querySelectorAll('.nav-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.page === page);
+  });
 }
 
 // SEARCH
-document.getElementById('searchBtn').addEventListener('click', () => {
-  const container = document.getElementById('searchContainer');
-  container.classList.toggle('show');
-  if(container.classList.contains('show')){
-    document.getElementById('searchInput').focus();
-  }
-});
-
 document.getElementById('searchInput').addEventListener('input', (e) => {
   searchQuery = e.target.value.toLowerCase();
   if(currentPage === 'schedule') renderSchedule(searchQuery);
@@ -560,7 +704,6 @@ document.getElementById('splash-enter').addEventListener('click', () => {
   app.style.opacity = '1';
   setTimeout(() => {
     splash.style.display = 'none';
-    renderSchedule();
   }, 950);
 });
 
