@@ -20,7 +20,8 @@
   --ocean:'Pacifico',cursive;
   --r:8px;
 }
-html,body { height:100%; font-family:var(--sans); background:var(--paper); color:var(--text); overflow:hidden; }
+
+html,body { height:100%; font-family:var(--sans); background:var(--paper); color:var(--text); }
 
 /* SPLASH */
 #splash {
@@ -67,106 +68,188 @@ html,body { height:100%; font-family:var(--sans); background:var(--paper); color
 .sp-btn svg{transition:transform .3s;}
 .sp-btn:hover svg{transform:translateX(4px);}
 
-/* APP SHELL */
-#app{display:flex;height:100vh;width:100vw;opacity:0;transition:opacity .8s ease .1s;}
+/* APP SHELL - MOBILE FIRST */
+#app{
+  display:flex; flex-direction:column; height:100vh; width:100vw; opacity:0; transition:opacity .8s ease .1s;
+  overflow:hidden;
+}
 
-/* SIDEBAR */
-.sidebar{width:200px;flex-shrink:0;background:linear-gradient(170deg,var(--navy) 0%,var(--navy2) 100%);display:flex;flex-direction:column;border-right:1px solid var(--border-d);position:relative;overflow:hidden;}
-.sidebar::after{content:'';position:absolute;bottom:0;left:0;right:0;height:120px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 80'%3E%3Cpath d='M0,40 C60,10 120,70 200,40 C280,10 340,70 400,40 L400,80 L0,80 Z' fill='rgba(30,95,168,0.2)'/%3E%3Cpath d='M0,55 C80,30 160,75 240,55 C320,35 370,70 400,55 L400,80 L0,80 Z' fill='rgba(126,207,234,0.1)'/%3E%3C/svg%3E") bottom/100% auto no-repeat;pointer-events:none;}
-.sb-logo{padding:22px 18px 18px;border-bottom:1px solid var(--border-d);flex-shrink:0;}
-.sb-badge{font-family:var(--ocean);font-size:1.5rem;color:#fff;line-height:1;text-shadow:0 2px 12px rgba(126,207,234,.2);}
-.sb-sub{font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;color:rgba(255,255,255,.3);text-transform:uppercase;margin-top:4px;}
-.sb-stats{padding:14px 18px;border-bottom:1px solid var(--border-d);display:flex;flex-direction:column;gap:10px;flex-shrink:0;}
-.sb-stat{display:flex;align-items:center;justify-content:space-between;}
-.sb-stat-label{font-family:var(--mono);font-size:.6rem;letter-spacing:.06em;color:rgba(255,255,255,.3);text-transform:uppercase;}
-.sb-stat-val{font-family:var(--mono);font-size:.72rem;color:var(--sky);font-weight:500;}
-.sb-nav{padding:12px 10px;display:flex;flex-direction:column;gap:3px;flex:1;}
-.sb-nav-label{font-family:var(--mono);font-size:.55rem;letter-spacing:.12em;color:rgba(255,255,255,.22);text-transform:uppercase;padding:8px 8px 4px;}
-.sb-link{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:6px;color:rgba(255,255,255,.5);font-family:var(--mono);font-size:.72rem;letter-spacing:.03em;cursor:pointer;transition:all .2s;border:1px solid transparent;background:none;width:100%;text-align:left;}
-.sb-link .icon{font-size:.95rem;flex-shrink:0;}
-.sb-link:hover{color:rgba(255,255,255,.85);background:rgba(255,255,255,.06);}
-.sb-link.active{color:#fff;background:rgba(126,207,234,.12);border-color:rgba(126,207,234,.2);}
-.icon-dot{display:none;width:5px;height:5px;border-radius:50%;background:var(--sky);margin-left:auto;flex-shrink:0;}
-.sb-link.active .icon-dot{display:block;}
-.sb-foot{padding:14px 18px;border-top:1px solid var(--border-d);font-family:var(--mono);font-size:.58rem;color:rgba(255,255,255,.2);line-height:1.7;flex-shrink:0;position:relative;z-index:1;}
+/* HEADER */
+.header{
+  background:var(--white); border-bottom:1px solid var(--border);
+  padding:14px 16px; flex-shrink:0;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.header-back{
+  background:none; border:none; cursor:pointer; font-size:1.2rem;
+  padding:4px 8px; color:var(--text); transition:all .2s;
+}
+.header-back:hover{background:var(--border); border-radius:var(--r);}
+.header-back.hidden{display:none;}
+.header-title{
+  font-family:var(--serif); font-size:1.1rem; font-weight:600;
+  flex:1; text-align:center;
+}
+.header-search{
+  width:30px; height:30px; background:none; border:none;
+  color:var(--muted); cursor:pointer; font-size:1rem;
+}
 
-/* MAIN */
-.main{flex:1;display:flex;flex-direction:column;min-width:0;background:var(--paper);}
-.topbar{height:52px;flex-shrink:0;background:var(--white);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 24px;gap:0;}
-.topbar-tabs{display:flex;align-items:center;gap:2px;flex:1;}
-.tab-btn{display:flex;align-items:center;gap:7px;padding:0 16px;height:52px;font-family:var(--mono);font-size:.72rem;letter-spacing:.04em;color:var(--muted);background:none;border:none;cursor:pointer;transition:all .2s;position:relative;white-space:nowrap;}
-.tab-btn::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--blue2);transform:scaleX(0);transition:transform .25s ease;}
-.tab-btn:hover{color:var(--text);}
-.tab-btn.active{color:var(--blue);}
-.tab-btn.active::after{transform:scaleX(1);}
-.topbar-right{display:flex;align-items:center;gap:10px;}
-.search-box{display:flex;align-items:center;gap:8px;background:var(--paper);border:1px solid var(--border);border-radius:99px;padding:6px 14px;transition:all .2s;}
-.search-box:focus-within{border-color:var(--blue2);background:var(--white);}
-.search-box svg{color:var(--muted);flex-shrink:0;}
-.search-box input{border:none;background:transparent;font-family:var(--sans);font-size:.8rem;color:var(--text);outline:none;width:160px;}
-.search-box input::placeholder{color:var(--muted);}
+/* SEARCH BOX */
+.search-container{
+  display:none; background:var(--white); padding:12px 16px;
+  border-bottom:1px solid var(--border); flex-shrink:0;
+}
+.search-container.show{display:block;}
+.search-input{
+  width:100%; padding:10px 12px; border:1px solid var(--border);
+  border-radius:var(--r); font-family:var(--sans); font-size:.9rem;
+  outline:none; transition:border-color .2s;
+}
+.search-input:focus{border-color:var(--blue2);}
 
-/* PANELS */
-.panels{flex:1;overflow:hidden;position:relative;}
-.panel{position:absolute;inset:0;padding:24px 28px;overflow-y:auto;opacity:0;transform:translateX(18px);transition:opacity .3s ease,transform .3s ease;pointer-events:none;}
-.panel.active{opacity:1;transform:translateX(0);pointer-events:all;}
-.panel.exit{opacity:0;transform:translateX(-18px);}
-.panel-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;}
-.panel-title{font-family:var(--serif);font-size:1.45rem;font-weight:400;line-height:1.1;}
-.panel-count{font-family:var(--mono);font-size:.65rem;letter-spacing:.08em;color:var(--muted);background:var(--border);padding:3px 10px;border-radius:99px;}
+/* CONTENT CONTAINER */
+.content{
+  flex:1; overflow-y:auto; padding:16px;
+  opacity:1; transform:translateY(0); transition:opacity .4s ease, transform .4s ease;
+}
+.content.fade-out{opacity:0; transform:translateY(20px); pointer-events:none;}
 
-/* SCHEDULE */
-.schedule-list{display:flex;flex-direction:column;gap:8px;}
-.s-item{display:grid;grid-template-columns:90px 1fr auto;background:var(--white);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;transition:transform .15s,box-shadow .15s;}
-.s-item:hover{transform:translateX(4px);box-shadow:0 2px 12px rgba(7,17,31,.07);}
-.s-day{background:linear-gradient(135deg,var(--navy),#1a4a7a);color:#fff;padding:14px 12px;display:flex;flex-direction:column;justify-content:center;gap:3px;}
-.s-dayname{font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--sky);}
-.s-time{font-family:var(--mono);font-size:.68rem;color:rgba(255,255,255,.7);}
-.s-body{padding:12px 16px;}
-.s-course{font-family:var(--serif);font-size:.95rem;margin-bottom:2px;}
-.s-lecturer{font-size:.75rem;color:var(--muted);}
-.s-room{padding:12px 16px;display:flex;align-items:center;}
+/* PAGE TITLE & COUNT */
+.page-header{
+  margin-bottom:20px;
+  display:flex; align-items:baseline; gap:12px;
+}
+.page-title{
+  font-family:var(--serif); font-size:1.3rem; font-weight:400;
+}
+.page-count{
+  font-family:var(--mono); font-size:.65rem; letter-spacing:.08em;
+  color:var(--muted); background:var(--border); padding:4px 10px;
+  border-radius:99px;
+}
 
-/* MEMBERS LIST */
-.members-list{display:flex;flex-direction:column;gap:6px;}
-.m-item{display:flex;align-items:center;padding:12px 14px;background:var(--white);border:1px solid var(--border);border-radius:var(--r);transition:all .2s;}
-.m-item:hover{background:rgba(126,207,234,.02);border-color:var(--blue2);transform:translateX(3px);}
-.m-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--navy),var(--blue));display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.8rem;color:#fff;flex-shrink:0;font-weight:600;margin-right:12px;}
-.m-details{flex:1;min-width:0;}
-.m-name{font-size:.88rem;font-weight:600;color:var(--text);}
-.m-id{font-family:var(--mono);font-size:.65rem;color:var(--muted);margin-top:2px;}
-.m-status{font-family:var(--mono);font-size:.65rem;color:var(--sky);text-align:right;}
+/* LIST ITEMS */
+.list-container{
+  display:flex; flex-direction:column; gap:10px;
+}
 
-/* PRACTICUM */
-.prac-list{display:flex;flex-direction:column;gap:6px;}
-.p-item{display:flex;align-items:center;padding:14px;background:var(--white);border:1px solid var(--border);border-radius:var(--r);transition:all .2s;}
-.p-item:hover{background:rgba(126,207,234,.02);border-color:var(--blue2);transform:translateX(3px);}
-.p-icon{font-size:1.8rem;margin-right:12px;flex-shrink:0;}
-.p-info{flex:1;}
-.p-course{font-size:.88rem;font-weight:600;color:var(--text);margin-bottom:4px;}
-.p-time{font-family:var(--mono);font-size:.65rem;color:var(--muted);}
-.p-day{font-family:var(--mono);font-size:.65rem;color:var(--sky);margin-right:auto;text-align:right;}
+/* SCHEDULE ITEM */
+.schedule-item{
+  background:var(--white); border:1px solid var(--border);
+  border-radius:var(--r); overflow:hidden;
+  transition:all .2s; padding:0;
+  display:flex; flex-direction:column;
+}
+.schedule-item:active{background:rgba(126,207,234,.02);}
+.schedule-header{
+  background:linear-gradient(135deg,var(--navy),#1a4a7a);
+  color:#fff; padding:12px 14px;
+  display:flex; flex-direction:column; gap:4px;
+}
+.schedule-day{
+  font-family:var(--mono); font-size:.65rem; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--sky);
+}
+.schedule-time{
+  font-family:var(--mono); font-size:.75rem; color:rgba(255,255,255,.7);
+}
+.schedule-body{
+  padding:12px 14px;
+}
+.schedule-course{
+  font-family:var(--serif); font-size:.95rem; margin-bottom:4px; font-weight:500;
+}
+.schedule-room{
+  font-family:var(--mono); font-size:.7rem; color:var(--muted);
+  display:inline-block; background:var(--border); padding:3px 8px;
+  border-radius:3px; margin-top:6px;
+}
 
-/* BADGE */
-.badge{display:inline-block;font-family:var(--mono);font-size:.62rem;padding:2px 8px;border-radius:3px;white-space:nowrap;}
-.badge-dark{background:var(--navy);color:#fff;}
-.badge-light{background:var(--border);color:var(--muted);border:1px solid rgba(0,0,0,.06);}
+/* MEMBER ITEM */
+.member-item{
+  background:var(--white); border:1px solid var(--border);
+  border-radius:var(--r); padding:12px 14px;
+  display:flex; align-items:center; gap:12px;
+  transition:all .2s;
+}
+.member-item:active{background:rgba(126,207,234,.02);}
+.member-avatar{
+  width:44px; height:44px; border-radius:50%;
+  background:linear-gradient(135deg,var(--navy),var(--blue));
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--mono); font-size:.85rem; color:#fff;
+  font-weight:600; flex-shrink:0;
+}
+.member-info{
+  flex:1; min-width:0;
+}
+.member-name{
+  font-size:.9rem; font-weight:600; color:var(--text);
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.member-id{
+  font-family:var(--mono); font-size:.65rem; color:var(--muted);
+  margin-top:2px;
+}
 
-/* EMPTY */
-.empty-panel{text-align:center;padding:32px;color:var(--muted);font-style:italic;font-size:.875rem;}
+/* PRACTICUM ITEM */
+.practicum-item{
+  background:var(--white); border:1px solid var(--border);
+  border-radius:var(--r); padding:12px 14px;
+  display:flex; gap:12px;
+  transition:all .2s;
+}
+.practicum-item:active{background:rgba(126,207,234,.02);}
+.practicum-icon{
+  font-size:2rem; flex-shrink:0;
+}
+.practicum-info{
+  flex:1;
+}
+.practicum-course{
+  font-size:.9rem; font-weight:600; color:var(--text);
+  margin-bottom:4px;
+}
+.practicum-time{
+  font-family:var(--mono); font-size:.7rem; color:var(--muted);
+}
+.practicum-day{
+  font-family:var(--mono); font-size:.7rem; color:var(--sky);
+  margin-top:4px;
+}
+
+/* EMPTY STATE */
+.empty-state{
+  text-align:center; padding:40px 20px; color:var(--muted);
+  font-style:italic; font-size:.9rem;
+}
+
+/* BOTTOM NAV */
+.bottom-nav{
+  background:var(--white); border-top:1px solid var(--border);
+  display:flex; justify-content:space-around; padding:8px 0;
+  flex-shrink:0;
+}
+.nav-btn{
+  flex:1; padding:12px 8px; background:none; border:none;
+  cursor:pointer; display:flex; flex-direction:column;
+  align-items:center; gap:4px; color:var(--muted);
+  font-family:var(--mono); font-size:.6rem; letter-spacing:.05em;
+  text-transform:uppercase; transition:all .2s;
+  position:relative;
+}
+.nav-btn.active{color:var(--blue);}
+.nav-btn.active::after{
+  content:''; position:absolute; top:0; left:0; right:0;
+  height:3px; background:var(--blue);
+}
+.nav-icon{font-size:1.3rem;}
 
 /* SCROLLBAR */
-::-webkit-scrollbar{width:4px;height:4px;}
+::-webkit-scrollbar{width:4px;}
 ::-webkit-scrollbar-track{background:transparent;}
-::-webkit-scrollbar-thumb{background:var(--border);border-radius:99px;}
-
-/* MOBILE */
-@media(max-width:700px){
-  .sidebar{display:none;}
-  .tab-btn .t-label{display:none;}
-  .search-box input{width:100px;}
-  .m-status{display:none;}
-}
+::-webkit-scrollbar-thumb{background:var(--border); border-radius:99px;}
 </style>
 </head>
 <body>
@@ -243,71 +326,51 @@ html,body { height:100%; font-family:var(--sans); background:var(--paper); color
 
 <!-- APP -->
 <div id="app">
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <div class="sb-logo">
-      <div class="sb-badge">IKL-C</div>
-      <div class="sb-sub">Ilmu Kelautan · 2025</div>
-    </div>
-    <div class="sb-stats">
-      <div class="sb-stat"><span class="sb-stat-label">Semester</span><span class="sb-stat-val">2 (Genap)</span></div>
-      <div class="sb-stat"><span class="sb-stat-label">Mahasiswa</span><span class="sb-stat-val">41 orang</span></div>
-      <div class="sb-stat"><span class="sb-stat-label">Matkul</span><span class="sb-stat-val">8 mata kuliah</span></div>
-    </div>
-    <nav class="sb-nav">
-      <span class="sb-nav-label">Menu</span>
-      <button class="sb-link active" data-panel="schedule"><span class="icon">📅</span> Jadwal Kuliah<span class="icon-dot"></span></button>
-      <button class="sb-link" data-panel="members"><span class="icon">👥</span> Anggota<span class="icon-dot"></span></button>
-      <button class="sb-link" data-panel="practicum"><span class="icon">🔬</span> Praktikum<span class="icon-dot"></span></button>
-    </nav>
-    <div class="sb-foot">Semester 2 · Angkatan 2025<br>Ilmu Kelautan — Kelas C</div>
-  </aside>
-
-  <!-- MAIN -->
-  <div class="main">
-    <!-- TOPBAR -->
-    <div class="topbar">
-      <div class="topbar-tabs">
-        <button class="tab-btn active" data-panel="schedule"><span class="t-icon">📅</span><span class="t-label">Jadwal Kuliah</span></button>
-        <button class="tab-btn" data-panel="members"><span class="t-icon">👥</span><span class="t-label">Anggota</span></button>
-        <button class="tab-btn" data-panel="practicum"><span class="t-icon">🔬</span><span class="t-label">Praktikum</span></button>
-      </div>
-      <div class="topbar-right">
-        <div class="search-box">
-          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-          <input id="global-search" type="text" placeholder="Cari…" autocomplete="off"/>
-        </div>
-      </div>
-    </div>
-
-    <!-- PANELS -->
-    <div class="panels">
-      <div class="panel active" id="panel-schedule">
-        <div class="panel-head"><h2 class="panel-title">Jadwal Kuliah</h2><span class="panel-count" id="sched-count"></span></div>
-        <div class="schedule-list" id="schedule-list"></div>
-      </div>
-      <div class="panel" id="panel-members">
-        <div class="panel-head"><h2 class="panel-title">Anggota Kelas</h2><span class="panel-count" id="member-count"></span></div>
-        <div class="members-list" id="members-list"></div>
-      </div>
-      <div class="panel" id="panel-practicum">
-        <div class="panel-head"><h2 class="panel-title">Jadwal Praktikum</h2><span class="panel-count" id="prac-count"></span></div>
-        <div class="prac-list" id="prac-list"></div>
-      </div>
-    </div>
+  <!-- HEADER -->
+  <div class="header">
+    <button class="header-back hidden" id="backBtn">← Kembali</button>
+    <div class="header-title" id="headerTitle">Jadwal Kuliah</div>
+    <button class="header-search" id="searchBtn">🔍</button>
   </div>
+
+  <!-- SEARCH -->
+  <div class="search-container" id="searchContainer">
+    <input type="text" class="search-input" id="searchInput" placeholder="Cari..." autocomplete="off"/>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content" id="content">
+    <!-- Will be populated by JavaScript -->
+  </div>
+
+  <!-- BOTTOM NAVIGATION -->
+  <nav class="bottom-nav">
+    <button class="nav-btn active" data-page="schedule">
+      <span class="nav-icon">📅</span>
+      <span>Jadwal</span>
+    </button>
+    <button class="nav-btn" data-page="members">
+      <span class="nav-icon">👥</span>
+      <span>Anggota</span>
+    </button>
+    <button class="nav-btn" data-page="practicum">
+      <span class="nav-icon">🔬</span>
+      <span>Praktikum</span>
+    </button>
+  </nav>
 </div>
 
 <script>
+// DATA
 const scheduleData = [
-  {course:'Mikrobiologi Laut',lecturer:'',day:'Senin',time:'12.30 – 13.50',room:'Acropora'},
-  {course:'Selam Ilmiah',lecturer:'',day:'Selasa',time:'07.30 – 08.50',room:'Oshphronemus'},
-  {course:'Manajemen Kewirausahaan Kelautan',lecturer:'',day:'Selasa',time:'10.30 – 11.50',room:'Acropora'},
-  {course:'Penginderaan Jauh Kelautan',lecturer:'',day:'Selasa',time:'14.00 – 15.20',room:'Puntius'},
-  {course:'English for Academic',lecturer:'',day:'Kamis',time:'09.00 – 10.20',room:'Caranx'},
-  {course:'PKN',lecturer:'',day:'Kamis',time:'12.30 – 13.50',room:'Ruangan Ga Pasti'},
-  {course:'Klimatologi Laut',lecturer:'',day:"Jum'at",time:'09.00 – 10.20',room:'Botia'},
-  {course:'Fisiologi Hewan Laut',lecturer:'',day:"Jum'at",time:'13.00 – 14.20',room:'Mystus'},
+  {course:'Mikrobiologi Laut',day:'Senin',time:'12.30 – 13.50',room:'Acropora'},
+  {course:'Selam Ilmiah',day:'Selasa',time:'07.30 – 08.50',room:'Oshphronemus'},
+  {course:'Manajemen Kewirausahaan Kelautan',day:'Selasa',time:'10.30 – 11.50',room:'Acropora'},
+  {course:'Penginderaan Jauh Kelautan',day:'Selasa',time:'14.00 – 15.20',room:'Puntius'},
+  {course:'English for Academic',day:'Kamis',time:'09.00 – 10.20',room:'Caranx'},
+  {course:'PKN',day:'Kamis',time:'12.30 – 13.50',room:'Ruangan Ga Pasti'},
+  {course:'Klimatologi Laut',day:"Jum'at",time:'09.00 – 10.20',room:'Botia'},
+  {course:'Fisiologi Hewan Laut',day:"Jum'at",time:'13.00 – 14.20',room:'Mystus'},
 ];
 
 const memberData = [
@@ -341,80 +404,168 @@ const practicumData = [
   {course:'Penginderaan Jauh Kelautan',day:'Selasa',time:'19.00 – 22.00'},
 ];
 
+// STATE
+let currentPage = 'schedule';
+let searchQuery = '';
+
 function initials(n){return n.split(' ').slice(0,2).map(w=>w[0]).join('').toUpperCase();}
 
+// RENDER FUNCTIONS
 function renderSchedule(q=''){
-  const f=scheduleData.filter(s=>s.course.toLowerCase().includes(q)||s.day.toLowerCase().includes(q)||s.room.toLowerCase().includes(q));
-  document.getElementById('sched-count').textContent=f.length+' matkul';
-  document.getElementById('schedule-list').innerHTML=f.length?f.map(s=>`
-    <div class="s-item">
-      <div class="s-day"><div class="s-dayname">${s.day}</div><div class="s-time">${s.time}</div></div>
-      <div class="s-body"><div class="s-course">${s.course}</div>${s.lecturer?`<div class="s-lecturer">${s.lecturer}</div>`:''}</div>
-      <div class="s-room"><span class="badge badge-light">${s.room}</span></div>
-    </div>`).join(''):`<div class="empty-panel">Tidak ada jadwal ditemukan.</div>`;
+  const filtered = scheduleData.filter(s=>
+    s.course.toLowerCase().includes(q) || s.day.toLowerCase().includes(q) || s.room.toLowerCase().includes(q)
+  );
+  
+  const content = document.getElementById('content');
+  content.innerHTML = `
+    <div class="page-header">
+      <h1 class="page-title">Jadwal Kuliah</h1>
+      <span class="page-count">${filtered.length}</span>
+    </div>
+    <div class="list-container">
+      ${filtered.length ? filtered.map(s => `
+        <div class="schedule-item">
+          <div class="schedule-header">
+            <div class="schedule-day">${s.day}</div>
+            <div class="schedule-time">${s.time}</div>
+          </div>
+          <div class="schedule-body">
+            <div class="schedule-course">${s.course}</div>
+            <span class="schedule-room">${s.room}</span>
+          </div>
+        </div>
+      `).join('') : '<div class="empty-state">Tidak ada jadwal ditemukan.</div>'}
+    </div>
+  `;
 }
 
 function renderMembers(q=''){
-  const f=memberData.filter(m=>m.name.toLowerCase().includes(q)||m.id.includes(q));
-  document.getElementById('member-count').textContent=f.length+' mahasiswa';
-  document.getElementById('members-list').innerHTML=f.length?f.map(m=>`
-    <div class="m-item">
-      <div class="m-avatar">${initials(m.name)}</div>
-      <div class="m-details">
-        <div class="m-name">${m.name}</div>
-        <div class="m-id">${m.id}</div>
-      </div>
-      <div class="m-status">👤</div>
-    </div>`).join(''):`<div class="empty-panel">Tidak ada mahasiswa ditemukan.</div>`;
+  const filtered = memberData.filter(m=>
+    m.name.toLowerCase().includes(q) || m.id.includes(q)
+  );
+  
+  const content = document.getElementById('content');
+  content.innerHTML = `
+    <div class="page-header">
+      <h1 class="page-title">Anggota Kelas</h1>
+      <span class="page-count">${filtered.length}</span>
+    </div>
+    <div class="list-container">
+      ${filtered.length ? filtered.map(m => `
+        <div class="member-item">
+          <div class="member-avatar">${initials(m.name)}</div>
+          <div class="member-info">
+            <div class="member-name">${m.name}</div>
+            <div class="member-id">${m.id}</div>
+          </div>
+        </div>
+      `).join('') : '<div class="empty-state">Tidak ada mahasiswa ditemukan.</div>'}
+    </div>
+  `;
 }
 
 function renderPracticum(q=''){
-  const f=practicumData.filter(p=>p.course.toLowerCase().includes(q)||p.day.toLowerCase().includes(q));
-  document.getElementById('prac-count').textContent=f.length+' praktikum';
-  document.getElementById('prac-list').innerHTML=f.length?f.map(p=>`
-    <div class="p-item">
-      <div class="p-icon">🔬</div>
-      <div class="p-info">
-        <div class="p-course">${p.course}</div>
-        <div class="p-time">${p.time}</div>
-      </div>
-      <div class="p-day">${p.day}</div>
-    </div>`).join(''):`<div class="empty-panel">Tidak ada praktikum ditemukan.</div>`;
-}
-
-let cur='schedule';
-function switchPanel(id){
-  if(id===cur)return;
-  const prev=document.getElementById('panel-'+cur);
-  prev.classList.add('exit');
-  setTimeout(()=>{prev.classList.remove('active','exit');},300);
-  setTimeout(()=>{document.getElementById('panel-'+id).classList.add('active');},60);
-  document.querySelectorAll('.tab-btn,.sb-link').forEach(b=>b.classList.toggle('active',b.dataset.panel===id));
-  cur=id;
-  renderCurrent(document.getElementById('global-search').value);
-}
-
-function renderCurrent(q=''){
-  if(cur==='schedule')renderSchedule(q);
-  else if(cur==='members')renderMembers(q);
-  else if(cur==='practicum')renderPracticum(q);
-}
-
-document.addEventListener('DOMContentLoaded',()=>{
-  renderSchedule();
-  renderMembers();
-  renderPracticum();
+  const filtered = practicumData.filter(p=>
+    p.course.toLowerCase().includes(q) || p.day.toLowerCase().includes(q)
+  );
   
-  document.querySelectorAll('.tab-btn,.sb-link').forEach(b=>b.addEventListener('click',()=>switchPanel(b.dataset.panel)));
-  document.getElementById('global-search').addEventListener('input',e=>renderCurrent(e.target.value.toLowerCase()));
+  const content = document.getElementById('content');
+  content.innerHTML = `
+    <div class="page-header">
+      <h1 class="page-title">Jadwal Praktikum</h1>
+      <span class="page-count">${filtered.length}</span>
+    </div>
+    <div class="list-container">
+      ${filtered.length ? filtered.map(p => `
+        <div class="practicum-item">
+          <div class="practicum-icon">🔬</div>
+          <div class="practicum-info">
+            <div class="practicum-course">${p.course}</div>
+            <div class="practicum-time">${p.time}</div>
+            <div class="practicum-day">${p.day} • Setiap Minggu</div>
+          </div>
+        </div>
+      `).join('') : '<div class="empty-state">Tidak ada praktikum ditemukan.</div>'}
+    </div>
+  `;
+}
+
+// PAGE SWITCHING
+function switchPage(page){
+  if(page === currentPage) return;
   
-  const splash=document.getElementById('splash'),app=document.getElementById('app');
-  document.getElementById('splash-enter').addEventListener('click',()=>{
-    splash.classList.add('hide');
-    app.style.opacity='1';
-    setTimeout(()=>{splash.style.display='none';},950);
+  // Fade out
+  const content = document.getElementById('content');
+  content.classList.add('fade-out');
+  
+  setTimeout(() => {
+    currentPage = page;
+    
+    // Update header
+    const titles = {
+      schedule: 'Jadwal Kuliah',
+      members: 'Anggota Kelas',
+      practicum: 'Jadwal Praktikum'
+    };
+    document.getElementById('headerTitle').textContent = titles[page];
+    
+    // Render new page
+    if(page === 'schedule') renderSchedule(searchQuery);
+    else if(page === 'members') renderMembers(searchQuery);
+    else if(page === 'practicum') renderPracticum(searchQuery);
+    
+    // Fade in
+    content.classList.remove('fade-out');
+    
+    // Update nav buttons
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.page === page);
+    });
+    
+    // Close search
+    document.getElementById('searchContainer').classList.remove('show');
+    document.getElementById('searchInput').value = '';
+    searchQuery = '';
+  }, 200);
+}
+
+// SEARCH
+document.getElementById('searchBtn').addEventListener('click', () => {
+  const container = document.getElementById('searchContainer');
+  container.classList.toggle('show');
+  if(container.classList.contains('show')){
+    document.getElementById('searchInput').focus();
+  }
+});
+
+document.getElementById('searchInput').addEventListener('input', (e) => {
+  searchQuery = e.target.value.toLowerCase();
+  if(currentPage === 'schedule') renderSchedule(searchQuery);
+  else if(currentPage === 'members') renderMembers(searchQuery);
+  else if(currentPage === 'practicum') renderPracticum(searchQuery);
+});
+
+// NAV BUTTONS
+document.querySelectorAll('.nav-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    switchPage(btn.dataset.page);
   });
 });
+
+// SPLASH
+document.getElementById('splash-enter').addEventListener('click', () => {
+  const splash = document.getElementById('splash');
+  const app = document.getElementById('app');
+  splash.classList.add('hide');
+  app.style.opacity = '1';
+  setTimeout(() => {
+    splash.style.display = 'none';
+    renderSchedule();
+  }, 950);
+});
+
+// INIT
+renderSchedule();
 </script>
 </body>
 </html>
