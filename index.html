@@ -127,50 +127,25 @@ html,body { height:100%; font-family:var(--sans); background:var(--paper); color
 .s-lecturer{font-size:.75rem;color:var(--muted);}
 .s-room{padding:12px 16px;display:flex;align-items:center;}
 
-/* MEMBERS & PHOTO */
-.members-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;}
-.m-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;transition:transform .15s,box-shadow .15s;cursor:pointer;}
-.m-card:hover{transform:translateY(-3px);box-shadow:0 4px 16px rgba(7,17,31,.12);}
-.m-photo-container{position:relative;width:100%;padding-bottom:100%;background:linear-gradient(135deg,var(--navy),var(--blue));overflow:hidden;}
-.m-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
-.m-photo-placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--navy),var(--blue));font-family:var(--mono);font-size:3rem;color:rgba(255,255,255,.3);}
-.m-photo-upload{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.5);opacity:0;transition:opacity .2s;z-index:10;}
-.m-card:hover .m-photo-upload{opacity:1;}
-.m-photo-upload svg{width:28px;height:28px;color:#fff;}
-.m-info{padding:12px 14px;}
-.m-name{font-size:.85rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.m-id{font-family:var(--mono);font-size:.62rem;color:var(--muted);margin-top:2px;}
-
-/* PHOTO MODAL */
-.photo-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:1000;align-items:center;justify-content:center;}
-.photo-modal.open{display:flex;}
-.photo-modal-content{background:var(--white);border-radius:var(--r);padding:24px;max-width:400px;width:90%;box-shadow:0 10px 40px rgba(0,0,0,.2);}
-.pm-title{font-family:var(--serif);font-size:1.2rem;margin-bottom:16px;}
-.pm-preview{width:100%;aspect-ratio:1;background:var(--border);border-radius:var(--r);margin-bottom:16px;display:flex;align-items:center;justify-content:center;overflow:hidden;}
-.pm-preview img{width:100%;height:100%;object-fit:cover;}
-.pm-input-group{margin-bottom:14px;}
-.pm-input-group label{display:block;font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
-.pm-input-group input{width:100%;padding:8px 12px;border:1px solid var(--border);border-radius:var(--r);font-family:var(--sans);font-size:.85rem;transition:border-color .2s;}
-.pm-input-group input:focus{outline:none;border-color:var(--blue2);}
-.pm-file-input{display:none;}
-.pm-upload-btn{display:block;width:100%;padding:10px;background:var(--border);border:2px dashed var(--blue2);border-radius:var(--r);color:var(--text);font-family:var(--sans);font-size:.85rem;cursor:pointer;transition:all .2s;text-align:center;margin-bottom:14px;}
-.pm-upload-btn:hover{background:rgba(45,122,196,.05);}
-.pm-actions{display:flex;gap:10px;}
-.pm-btn{flex:1;padding:10px;border:1px solid var(--border);border-radius:var(--r);background:none;font-family:var(--mono);font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:all .2s;}
-.pm-btn.primary{background:var(--blue);color:#fff;border-color:var(--blue);}
-.pm-btn.primary:hover{background:var(--blue2);}
-.pm-btn:hover{background:var(--border);}
+/* MEMBERS LIST */
+.members-list{display:flex;flex-direction:column;gap:6px;}
+.m-item{display:flex;align-items:center;padding:12px 14px;background:var(--white);border:1px solid var(--border);border-radius:var(--r);transition:all .2s;}
+.m-item:hover{background:rgba(126,207,234,.02);border-color:var(--blue2);transform:translateX(3px);}
+.m-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--navy),var(--blue));display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.8rem;color:#fff;flex-shrink:0;font-weight:600;margin-right:12px;}
+.m-details{flex:1;min-width:0;}
+.m-name{font-size:.88rem;font-weight:600;color:var(--text);}
+.m-id{font-family:var(--mono);font-size:.65rem;color:var(--muted);margin-top:2px;}
+.m-status{font-family:var(--mono);font-size:.65rem;color:var(--sky);text-align:right;}
 
 /* PRACTICUM */
-.prac-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;}
-.p-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;transition:transform .15s,box-shadow .15s;}
-.p-card:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(7,17,31,.09);}
-.p-card-top{background:linear-gradient(135deg,var(--navy),#1a4a7a);padding:16px;}
-.p-card-day{font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--sky);margin-bottom:5px;}
-.p-card-name{font-family:var(--serif);font-size:1.05rem;color:#fff;line-height:1.2;}
-.p-card-body{padding:12px 16px;}
-.p-card-row{display:flex;justify-content:space-between;align-items:center;font-size:.78rem;}
-.p-card-label{font-family:var(--mono);font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);}
+.prac-list{display:flex;flex-direction:column;gap:6px;}
+.p-item{display:flex;align-items:center;padding:14px;background:var(--white);border:1px solid var(--border);border-radius:var(--r);transition:all .2s;}
+.p-item:hover{background:rgba(126,207,234,.02);border-color:var(--blue2);transform:translateX(3px);}
+.p-icon{font-size:1.8rem;margin-right:12px;flex-shrink:0;}
+.p-info{flex:1;}
+.p-course{font-size:.88rem;font-weight:600;color:var(--text);margin-bottom:4px;}
+.p-time{font-family:var(--mono);font-size:.65rem;color:var(--muted);}
+.p-day{font-family:var(--mono);font-size:.65rem;color:var(--sky);margin-right:auto;text-align:right;}
 
 /* BADGE */
 .badge{display:inline-block;font-family:var(--mono);font-size:.62rem;padding:2px 8px;border-radius:3px;white-space:nowrap;}
@@ -190,7 +165,7 @@ html,body { height:100%; font-family:var(--sans); background:var(--paper); color
   .sidebar{display:none;}
   .tab-btn .t-label{display:none;}
   .search-box input{width:100px;}
-  .members-grid{grid-template-columns:1fr;}
+  .m-status{display:none;}
 }
 </style>
 </head>
@@ -313,30 +288,12 @@ html,body { height:100%; font-family:var(--sans); background:var(--paper); color
       </div>
       <div class="panel" id="panel-members">
         <div class="panel-head"><h2 class="panel-title">Anggota Kelas</h2><span class="panel-count" id="member-count"></span></div>
-        <div class="members-grid" id="members-grid"></div>
+        <div class="members-list" id="members-list"></div>
       </div>
       <div class="panel" id="panel-practicum">
         <div class="panel-head"><h2 class="panel-title">Jadwal Praktikum</h2><span class="panel-count" id="prac-count"></span></div>
-        <div class="prac-grid" id="prac-grid"></div>
+        <div class="prac-list" id="prac-list"></div>
       </div>
-    </div>
-  </div>
-</div>
-
-<!-- PHOTO MODAL -->
-<div class="photo-modal" id="photoModal">
-  <div class="photo-modal-content">
-    <h3 class="pm-title">Upload Pas Foto</h3>
-    <div class="pm-preview" id="photoPreview">
-      <span style="color:var(--muted)">📷</span>
-    </div>
-    <input type="file" id="photoFileInput" class="pm-file-input" accept="image/*"/>
-    <button class="pm-upload-btn" onclick="document.getElementById('photoFileInput').click()">
-      Pilih Foto atau Drag & Drop
-    </button>
-    <div class="pm-actions">
-      <button class="pm-btn" onclick="closePhotoModal()">Batal</button>
-      <button class="pm-btn primary" onclick="savePhoto()">Simpan</button>
     </div>
   </div>
 </div>
@@ -352,6 +309,7 @@ const scheduleData = [
   {course:'Klimatologi Laut',lecturer:'',day:"Jum'at",time:'09.00 – 10.20',room:'Botia'},
   {course:'Fisiologi Hewan Laut',lecturer:'',day:"Jum'at",time:'13.00 – 14.20',room:'Mystus'},
 ];
+
 const memberData = [
   {id:'L1C025099',name:'Muhammad Nabil Munaja'},{id:'L1C025100',name:'Rafael Lamhot'},
   {id:'L1C025102',name:'Kenny Danuarta'},{id:'L1C025103',name:'Dewi Mumpuni Puji Lestari'},
@@ -375,6 +333,7 @@ const memberData = [
   {id:'L1C025144',name:'Khaulah Majidah Hanun'},{id:'L1C025145',name:'Haninna Atqiyya Nysa'},
   {id:'L1C025147',name:'Zalfa Nabila Ghaitsa'},
 ];
+
 const practicumData = [
   {course:'Mikrobiologi Laut',day:'Rabu',time:'08.00 – 10.00'},
   {course:'Fisiologi Hewan Laut',day:'Rabu',time:'12.30 – 14.30'},
@@ -382,12 +341,7 @@ const practicumData = [
   {course:'Penginderaan Jauh Kelautan',day:'Selasa',time:'19.00 – 22.00'},
 ];
 
-// Photo storage
-let memberPhotos = JSON.parse(localStorage.getItem('memberPhotos')) || {};
-let currentEditingMemberId = null;
-
 function initials(n){return n.split(' ').slice(0,2).map(w=>w[0]).join('').toUpperCase();}
-function fmtDate(s){return new Date(s+'T00:00:00').toLocaleDateString('id-ID',{day:'2-digit',month:'short',year:'numeric'});}
 
 function renderSchedule(q=''){
   const f=scheduleData.filter(s=>s.course.toLowerCase().includes(q)||s.day.toLowerCase().includes(q)||s.room.toLowerCase().includes(q));
@@ -403,93 +357,29 @@ function renderSchedule(q=''){
 function renderMembers(q=''){
   const f=memberData.filter(m=>m.name.toLowerCase().includes(q)||m.id.includes(q));
   document.getElementById('member-count').textContent=f.length+' mahasiswa';
-  document.getElementById('members-grid').innerHTML=f.length?f.map(m=>`
-    <div class="m-card" onclick="openPhotoModal('${m.id}')">
-      <div class="m-photo-container">
-        ${memberPhotos[m.id]?`<img src="${memberPhotos[m.id]}" class="m-photo" alt="${m.name}"/>`:
-          `<div class="m-photo-placeholder">${initials(m.name)}</div>`}
-        <div class="m-photo-upload">
-          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path d="M12 4v16m8-8H4"/>
-          </svg>
-        </div>
-      </div>
-      <div class="m-info">
+  document.getElementById('members-list').innerHTML=f.length?f.map(m=>`
+    <div class="m-item">
+      <div class="m-avatar">${initials(m.name)}</div>
+      <div class="m-details">
         <div class="m-name">${m.name}</div>
         <div class="m-id">${m.id}</div>
       </div>
-    </div>`).join(''):`<div class="empty-panel" style="grid-column:1/-1">Tidak ada mahasiswa ditemukan.</div>`;
+      <div class="m-status">👤</div>
+    </div>`).join(''):`<div class="empty-panel">Tidak ada mahasiswa ditemukan.</div>`;
 }
 
 function renderPracticum(q=''){
   const f=practicumData.filter(p=>p.course.toLowerCase().includes(q)||p.day.toLowerCase().includes(q));
   document.getElementById('prac-count').textContent=f.length+' praktikum';
-  document.getElementById('prac-grid').innerHTML=f.length?f.map(p=>`
-    <div class="p-card">
-      <div class="p-card-top"><div class="p-card-day">${p.day} — Setiap Minggu</div><div class="p-card-name">${p.course}</div></div>
-      <div class="p-card-body"><div class="p-card-row"><span class="p-card-label">Jam</span><span style="font-family:var(--mono);font-size:.75rem">${p.time}</span></div></div>
+  document.getElementById('prac-list').innerHTML=f.length?f.map(p=>`
+    <div class="p-item">
+      <div class="p-icon">🔬</div>
+      <div class="p-info">
+        <div class="p-course">${p.course}</div>
+        <div class="p-time">${p.time}</div>
+      </div>
+      <div class="p-day">${p.day}</div>
     </div>`).join(''):`<div class="empty-panel">Tidak ada praktikum ditemukan.</div>`;
-}
-
-// Photo Modal Functions
-function openPhotoModal(memberId){
-  currentEditingMemberId = memberId;
-  const member = memberData.find(m => m.id === memberId);
-  document.querySelector('.pm-title').textContent = `Upload Pas Foto - ${member.name}`;
-  
-  const preview = document.getElementById('photoPreview');
-  if(memberPhotos[memberId]){
-    preview.innerHTML = `<img src="${memberPhotos[memberId]}" style="width:100%;height:100%;object-fit:cover;"/>`;
-  }else{
-    preview.innerHTML = '<span style="color:var(--muted)">📷</span>';
-  }
-  
-  document.getElementById('photoFileInput').value = '';
-  document.getElementById('photoModal').classList.add('open');
-}
-
-function closePhotoModal(){
-  document.getElementById('photoModal').classList.remove('open');
-  currentEditingMemberId = null;
-}
-
-document.getElementById('photoFileInput').addEventListener('change', function(e){
-  const file = e.target.files[0];
-  if(file){
-    const reader = new FileReader();
-    reader.onload = function(event){
-      document.getElementById('photoPreview').innerHTML = `<img src="${event.target.result}" style="width:100%;height:100%;object-fit:cover;"/>`;
-    };
-    reader.readAsDataURL(file);
-  }
-});
-
-// Drag and drop
-document.getElementById('photoPreview').addEventListener('dragover', (e) => {
-  e.preventDefault();
-  e.stopPropagation();
-});
-
-document.getElementById('photoPreview').addEventListener('drop', (e) => {
-  e.preventDefault();
-  e.stopPropagation();
-  const files = e.dataTransfer.files;
-  if(files.length > 0){
-    document.getElementById('photoFileInput').files = files;
-    const event = new Event('change', { bubbles: true });
-    document.getElementById('photoFileInput').dispatchEvent(event);
-  }
-});
-
-function savePhoto(){
-  const preview = document.getElementById('photoPreview');
-  const img = preview.querySelector('img');
-  if(img && currentEditingMemberId){
-    memberPhotos[currentEditingMemberId] = img.src;
-    localStorage.setItem('memberPhotos', JSON.stringify(memberPhotos));
-    renderMembers(document.getElementById('global-search').value);
-    closePhotoModal();
-  }
 }
 
 let cur='schedule';
@@ -503,6 +393,7 @@ function switchPanel(id){
   cur=id;
   renderCurrent(document.getElementById('global-search').value);
 }
+
 function renderCurrent(q=''){
   if(cur==='schedule')renderSchedule(q);
   else if(cur==='members')renderMembers(q);
@@ -510,21 +401,18 @@ function renderCurrent(q=''){
 }
 
 document.addEventListener('DOMContentLoaded',()=>{
-  renderSchedule();renderMembers();renderPracticum();
+  renderSchedule();
+  renderMembers();
+  renderPracticum();
+  
   document.querySelectorAll('.tab-btn,.sb-link').forEach(b=>b.addEventListener('click',()=>switchPanel(b.dataset.panel)));
   document.getElementById('global-search').addEventListener('input',e=>renderCurrent(e.target.value.toLowerCase()));
+  
   const splash=document.getElementById('splash'),app=document.getElementById('app');
   document.getElementById('splash-enter').addEventListener('click',()=>{
     splash.classList.add('hide');
     app.style.opacity='1';
     setTimeout(()=>{splash.style.display='none';},950);
-  });
-  
-  // Close modal when clicking outside
-  document.getElementById('photoModal').addEventListener('click', (e) => {
-    if(e.target.id === 'photoModal'){
-      closePhotoModal();
-    }
   });
 });
 </script>
