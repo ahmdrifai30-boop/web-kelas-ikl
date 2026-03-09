@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>IKL-C — Ilmu Kelautan 2025</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -18,6 +18,7 @@
   --mono:'DM Mono',monospace;
   --sans:'DM Sans',system-ui,sans-serif;
   --ocean:'Pacifico',cursive;
+  --nautical:'Playfair Display', serif;
   --r:8px;
 }
 
@@ -88,10 +89,11 @@ html,body { height:100%; width:100%; font-family:var(--sans); background:var(--p
   box-shadow:0 1px 3px rgba(0,0,0,.05);
 }
 .header-title{
-  font-family:var(--serif);
-  font-size:1.2rem;
-  font-weight:600;
-  color:var(--text);
+  font-family:var(--nautical);
+  font-size:1.4rem;
+  font-weight:900;
+  color:var(--navy);
+  letter-spacing:2px;
 }
 
 /* CONTENT AREA - SCROLLABLE */
@@ -131,10 +133,11 @@ html,body { height:100%; width:100%; font-family:var(--sans); background:var(--p
 }
 
 .page-title{
-  font-family:var(--serif);
-  font-size:1.3rem;
-  font-weight:400;
-  color:var(--text);
+  font-family:var(--nautical);
+  font-size:1.5rem;
+  font-weight:900;
+  color:var(--navy);
+  letter-spacing:1px;
 }
 
 .page-count{
@@ -192,10 +195,11 @@ html,body { height:100%; width:100%; font-family:var(--sans); background:var(--p
   padding:10px 12px;
 }
 .schedule-course{
-  font-family:var(--serif);
-  font-size:.95rem;
+  font-family:var(--nautical);
+  font-size:1.05rem;
   margin-bottom:5px;
-  font-weight:500;
+  font-weight:700;
+  color:var(--navy);
 }
 .schedule-room{
   font-family:var(--mono);
@@ -278,9 +282,10 @@ html,body { height:100%; width:100%; font-family:var(--sans); background:var(--p
   flex-shrink:0;
 }
 .practicum-course{
-  font-size:.9rem;
-  font-weight:600;
-  color:var(--text);
+  font-family:var(--nautical);
+  font-size:1.05rem;
+  font-weight:700;
+  color:var(--navy);
 }
 .practicum-bottom{
   display:flex;
@@ -396,7 +401,6 @@ html,body { height:100%; width:100%; font-family:var(--sans); background:var(--p
   background:var(--border);
   border-radius:99px;
 }
-
 </style>
 </head>
 <body>
@@ -475,7 +479,7 @@ html,body { height:100%; width:100%; font-family:var(--sans); background:var(--p
 <div id="app">
   <!-- HEADER -->
   <div class="header">
-    <div class="header-title" id="headerTitle">Jadwal Kuliah</div>
+    <div class="header-title" id="headerTitle">JADWAL KULIAH</div>
   </div>
 
   <!-- SEARCH -->
@@ -660,9 +664,9 @@ function switchPage(page){
   currentPage = page;
   
   const titles = {
-    schedule: 'Jadwal Kuliah',
-    members: 'Anggota Kelas',
-    practicum: 'Jadwal Praktikum'
+    schedule: 'JADWAL KULIAH',
+    members: 'ANGGOTA KELAS',
+    practicum: 'JADWAL PRAKTIKUM'
   };
   
   document.getElementById('headerTitle').textContent = titles[page];
