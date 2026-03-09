@@ -127,14 +127,39 @@ html,body { height:100%; font-family:var(--sans); background:var(--paper); color
 .s-lecturer{font-size:.75rem;color:var(--muted);}
 .s-room{padding:12px 16px;display:flex;align-items:center;}
 
-/* MEMBERS */
-.members-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;}
-.m-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:12px 14px;display:flex;align-items:center;gap:12px;transition:transform .15s,box-shadow .15s;}
-.m-card:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(7,17,31,.08);}
-.m-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--navy),var(--blue));display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.7rem;color:#fff;flex-shrink:0;font-weight:500;}
-.m-info{min-width:0;}
-.m-name{font-size:.82rem;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.m-id{font-family:var(--mono);font-size:.62rem;color:var(--muted);}
+/* MEMBERS & PHOTO */
+.members-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;}
+.m-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;transition:transform .15s,box-shadow .15s;cursor:pointer;}
+.m-card:hover{transform:translateY(-3px);box-shadow:0 4px 16px rgba(7,17,31,.12);}
+.m-photo-container{position:relative;width:100%;padding-bottom:100%;background:linear-gradient(135deg,var(--navy),var(--blue));overflow:hidden;}
+.m-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.m-photo-placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--navy),var(--blue));font-family:var(--mono);font-size:3rem;color:rgba(255,255,255,.3);}
+.m-photo-upload{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.5);opacity:0;transition:opacity .2s;z-index:10;}
+.m-card:hover .m-photo-upload{opacity:1;}
+.m-photo-upload svg{width:28px;height:28px;color:#fff;}
+.m-info{padding:12px 14px;}
+.m-name{font-size:.85rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.m-id{font-family:var(--mono);font-size:.62rem;color:var(--muted);margin-top:2px;}
+
+/* PHOTO MODAL */
+.photo-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:1000;align-items:center;justify-content:center;}
+.photo-modal.open{display:flex;}
+.photo-modal-content{background:var(--white);border-radius:var(--r);padding:24px;max-width:400px;width:90%;box-shadow:0 10px 40px rgba(0,0,0,.2);}
+.pm-title{font-family:var(--serif);font-size:1.2rem;margin-bottom:16px;}
+.pm-preview{width:100%;aspect-ratio:1;background:var(--border);border-radius:var(--r);margin-bottom:16px;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.pm-preview img{width:100%;height:100%;object-fit:cover;}
+.pm-input-group{margin-bottom:14px;}
+.pm-input-group label{display:block;font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.pm-input-group input{width:100%;padding:8px 12px;border:1px solid var(--border);border-radius:var(--r);font-family:var(--sans);font-size:.85rem;transition:border-color .2s;}
+.pm-input-group input:focus{outline:none;border-color:var(--blue2);}
+.pm-file-input{display:none;}
+.pm-upload-btn{display:block;width:100%;padding:10px;background:var(--border);border:2px dashed var(--blue2);border-radius:var(--r);color:var(--text);font-family:var(--sans);font-size:.85rem;cursor:pointer;transition:all .2s;text-align:center;margin-bottom:14px;}
+.pm-upload-btn:hover{background:rgba(45,122,196,.05);}
+.pm-actions{display:flex;gap:10px;}
+.pm-btn{flex:1;padding:10px;border:1px solid var(--border);border-radius:var(--r);background:none;font-family:var(--mono);font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:all .2s;}
+.pm-btn.primary{background:var(--blue);color:#fff;border-color:var(--blue);}
+.pm-btn.primary:hover{background:var(--blue2);}
+.pm-btn:hover{background:var(--border);}
 
 /* PRACTICUM */
 .prac-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;}
@@ -146,26 +171,6 @@ html,body { height:100%; font-family:var(--sans); background:var(--paper); color
 .p-card-body{padding:12px 16px;}
 .p-card-row{display:flex;justify-content:space-between;align-items:center;font-size:.78rem;}
 .p-card-label{font-family:var(--mono);font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);}
-
-/* ASSIGNMENTS - KANBAN */
-.assign-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;height:calc(100% - 56px);}
-.a-col{display:flex;flex-direction:column;gap:8px;min-height:0;}
-.a-col-head{display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:var(--r);font-family:var(--mono);font-size:.65rem;letter-spacing:.06em;text-transform:uppercase;font-weight:500;flex-shrink:0;}
-.a-col-head-0{background:#fee2d5;color:#c2410c;}
-.a-col-head-1{background:#d1fae5;color:#065f46;}
-.a-col-head-2{background:#e0f2fe;color:#0369a1;}
-.a-count{margin-left:auto;background:rgba(0,0,0,.1);border-radius:99px;padding:1px 7px;font-size:.6rem;}
-.a-col-body{display:flex;flex-direction:column;gap:6px;overflow-y:auto;flex:1;padding-bottom:8px;}
-.a-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:11px 13px;cursor:pointer;transition:all .2s;user-select:none;}
-.a-card:hover{box-shadow:0 3px 12px rgba(7,17,31,.08);transform:translateY(-1px);}
-.a-card-title{font-size:.82rem;font-weight:500;margin-bottom:4px;line-height:1.3;}
-.a-card-course{font-family:var(--mono);font-size:.62rem;color:var(--muted);margin-bottom:6px;}
-.a-card-deadline{font-family:var(--mono);font-size:.62rem;display:flex;align-items:center;gap:4px;}
-.deadline-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
-.dl-overdue{color:#c2410c;} .dl-overdue .deadline-dot{background:#c2410c;}
-.dl-soon{color:#b45309;} .dl-soon .deadline-dot{background:#f59e0b;}
-.dl-normal{color:var(--muted);} .dl-normal .deadline-dot{background:#94a3b8;}
-.a-hint{font-family:var(--mono);font-size:.6rem;color:var(--muted);text-align:center;margin-bottom:10px;opacity:.7;}
 
 /* BADGE */
 .badge{display:inline-block;font-family:var(--mono);font-size:.62rem;padding:2px 8px;border-radius:3px;white-space:nowrap;}
@@ -184,9 +189,8 @@ html,body { height:100%; font-family:var(--sans); background:var(--paper); color
 @media(max-width:700px){
   .sidebar{display:none;}
   .tab-btn .t-label{display:none;}
-  .assign-cols{grid-template-columns:1fr;}
   .search-box input{width:100px;}
-  .members-grid{grid-template-columns:1fr 1fr;}
+  .members-grid{grid-template-columns:1fr;}
 }
 </style>
 </head>
@@ -280,7 +284,6 @@ html,body { height:100%; font-family:var(--sans); background:var(--paper); color
       <button class="sb-link active" data-panel="schedule"><span class="icon">📅</span> Jadwal Kuliah<span class="icon-dot"></span></button>
       <button class="sb-link" data-panel="members"><span class="icon">👥</span> Anggota<span class="icon-dot"></span></button>
       <button class="sb-link" data-panel="practicum"><span class="icon">🔬</span> Praktikum<span class="icon-dot"></span></button>
-      <button class="sb-link" data-panel="assignments"><span class="icon">📋</span> Tugas<span class="icon-dot"></span></button>
     </nav>
     <div class="sb-foot">Semester 2 · Angkatan 2025<br>Ilmu Kelautan — Kelas C</div>
   </aside>
@@ -293,7 +296,6 @@ html,body { height:100%; font-family:var(--sans); background:var(--paper); color
         <button class="tab-btn active" data-panel="schedule"><span class="t-icon">📅</span><span class="t-label">Jadwal Kuliah</span></button>
         <button class="tab-btn" data-panel="members"><span class="t-icon">👥</span><span class="t-label">Anggota</span></button>
         <button class="tab-btn" data-panel="practicum"><span class="t-icon">🔬</span><span class="t-label">Praktikum</span></button>
-        <button class="tab-btn" data-panel="assignments"><span class="t-icon">📋</span><span class="t-label">Tugas</span></button>
       </div>
       <div class="topbar-right">
         <div class="search-box">
@@ -317,11 +319,24 @@ html,body { height:100%; font-family:var(--sans); background:var(--paper); color
         <div class="panel-head"><h2 class="panel-title">Jadwal Praktikum</h2><span class="panel-count" id="prac-count"></span></div>
         <div class="prac-grid" id="prac-grid"></div>
       </div>
-      <div class="panel" id="panel-assignments">
-        <div class="panel-head"><h2 class="panel-title">Daftar Tugas</h2><span class="panel-count" id="assign-count"></span></div>
-        <p class="a-hint">Klik kartu untuk pindah status →</p>
-        <div class="assign-cols" id="assign-cols"></div>
-      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PHOTO MODAL -->
+<div class="photo-modal" id="photoModal">
+  <div class="photo-modal-content">
+    <h3 class="pm-title">Upload Pas Foto</h3>
+    <div class="pm-preview" id="photoPreview">
+      <span style="color:var(--muted)">📷</span>
+    </div>
+    <input type="file" id="photoFileInput" class="pm-file-input" accept="image/*"/>
+    <button class="pm-upload-btn" onclick="document.getElementById('photoFileInput').click()">
+      Pilih Foto atau Drag & Drop
+    </button>
+    <div class="pm-actions">
+      <button class="pm-btn" onclick="closePhotoModal()">Batal</button>
+      <button class="pm-btn primary" onclick="savePhoto()">Simpan</button>
     </div>
   </div>
 </div>
@@ -366,24 +381,13 @@ const practicumData = [
   {course:'Klimatologi Laut',day:'Rabu',time:'15.00 – 17.00'},
   {course:'Penginderaan Jauh Kelautan',day:'Selasa',time:'19.00 – 22.00'},
 ];
-let assignmentData = [
-  {course:'Mikrobiologi Laut',title:'Laporan Praktikum 1',deadline:'2026-04-03',status:1},
-  {course:'Fisiologi Hewan Laut',title:'Resume Materi Fisiologi',deadline:'2026-04-10',status:0},
-  {course:'Klimatologi Laut',title:'Analisis Data Iklim',deadline:'2026-04-17',status:0},
-  {course:'English for Academic',title:'Academic Writing Draft',deadline:'2026-03-27',status:2},
-  {course:'Selam Ilmiah',title:'Log Book Selam',deadline:'2026-04-24',status:1},
-  {course:'PKN',title:'Makalah Kewarganegaraan',deadline:'2026-05-01',status:0},
-  {course:'Penginderaan Jauh',title:'Interpretasi Citra Satelit',deadline:'2026-04-20',status:0},
-  {course:'Manajemen Kewirausahaan',title:'Business Plan Draft',deadline:'2026-05-08',status:0},
-];
+
+// Photo storage
+let memberPhotos = JSON.parse(localStorage.getItem('memberPhotos')) || {};
+let currentEditingMemberId = null;
 
 function initials(n){return n.split(' ').slice(0,2).map(w=>w[0]).join('').toUpperCase();}
 function fmtDate(s){return new Date(s+'T00:00:00').toLocaleDateString('id-ID',{day:'2-digit',month:'short',year:'numeric'});}
-function dlClass(s){
-  const d=new Date(s+'T00:00:00'),t=new Date();t.setHours(0,0,0,0);
-  const diff=Math.ceil((d-t)/86400000);
-  return diff<0?'dl-overdue':diff<=7?'dl-soon':'dl-normal';
-}
 
 function renderSchedule(q=''){
   const f=scheduleData.filter(s=>s.course.toLowerCase().includes(q)||s.day.toLowerCase().includes(q)||s.room.toLowerCase().includes(q));
@@ -395,15 +399,28 @@ function renderSchedule(q=''){
       <div class="s-room"><span class="badge badge-light">${s.room}</span></div>
     </div>`).join(''):`<div class="empty-panel">Tidak ada jadwal ditemukan.</div>`;
 }
+
 function renderMembers(q=''){
   const f=memberData.filter(m=>m.name.toLowerCase().includes(q)||m.id.includes(q));
   document.getElementById('member-count').textContent=f.length+' mahasiswa';
   document.getElementById('members-grid').innerHTML=f.length?f.map(m=>`
-    <div class="m-card">
-      <div class="m-avatar">${initials(m.name)}</div>
-      <div class="m-info"><div class="m-name">${m.name}</div><div class="m-id">${m.id}</div></div>
+    <div class="m-card" onclick="openPhotoModal('${m.id}')">
+      <div class="m-photo-container">
+        ${memberPhotos[m.id]?`<img src="${memberPhotos[m.id]}" class="m-photo" alt="${m.name}"/>`:
+          `<div class="m-photo-placeholder">${initials(m.name)}</div>`}
+        <div class="m-photo-upload">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M12 4v16m8-8H4"/>
+          </svg>
+        </div>
+      </div>
+      <div class="m-info">
+        <div class="m-name">${m.name}</div>
+        <div class="m-id">${m.id}</div>
+      </div>
     </div>`).join(''):`<div class="empty-panel" style="grid-column:1/-1">Tidak ada mahasiswa ditemukan.</div>`;
 }
+
 function renderPracticum(q=''){
   const f=practicumData.filter(p=>p.course.toLowerCase().includes(q)||p.day.toLowerCase().includes(q));
   document.getElementById('prac-count').textContent=f.length+' praktikum';
@@ -413,29 +430,66 @@ function renderPracticum(q=''){
       <div class="p-card-body"><div class="p-card-row"><span class="p-card-label">Jam</span><span style="font-family:var(--mono);font-size:.75rem">${p.time}</span></div></div>
     </div>`).join(''):`<div class="empty-panel">Tidak ada praktikum ditemukan.</div>`;
 }
-const SL=['Belum Dikerjakan','Sedang Dikerjakan','Sudah Dikumpul'];
-const HC=['a-col-head-0','a-col-head-1','a-col-head-2'];
-const HI=['○','◑','●'];
-function renderAssignments(q=''){
-  const filtered=assignmentData.map((a,i)=>({...a,_i:i})).filter(a=>a.course.toLowerCase().includes(q)||a.title.toLowerCase().includes(q));
-  document.getElementById('assign-count').textContent=filtered.length+' tugas';
-  document.getElementById('assign-cols').innerHTML=[0,1,2].map(s=>{
-    const col=filtered.filter(a=>a.status===s);
-    return `<div class="a-col">
-      <div class="a-col-head ${HC[s]}">${HI[s]} ${SL[s]}<span class="a-count">${col.length}</span></div>
-      <div class="a-col-body">${col.length?col.map(a=>`
-        <div class="a-card" onclick="cycleStatus(${a._i})">
-          <div class="a-card-title">${a.title}</div>
-          <div class="a-card-course">${a.course}</div>
-          <div class="a-card-deadline ${dlClass(a.deadline)}"><span class="deadline-dot"></span>${fmtDate(a.deadline)}</div>
-        </div>`).join(''):`<div class="empty-panel" style="padding:20px;font-size:.75rem">Kosong</div>`}
-      </div>
-    </div>`;
-  }).join('');
+
+// Photo Modal Functions
+function openPhotoModal(memberId){
+  currentEditingMemberId = memberId;
+  const member = memberData.find(m => m.id === memberId);
+  document.querySelector('.pm-title').textContent = `Upload Pas Foto - ${member.name}`;
+  
+  const preview = document.getElementById('photoPreview');
+  if(memberPhotos[memberId]){
+    preview.innerHTML = `<img src="${memberPhotos[memberId]}" style="width:100%;height:100%;object-fit:cover;"/>`;
+  }else{
+    preview.innerHTML = '<span style="color:var(--muted)">📷</span>';
+  }
+  
+  document.getElementById('photoFileInput').value = '';
+  document.getElementById('photoModal').classList.add('open');
 }
-function cycleStatus(i){
-  assignmentData[i].status=(assignmentData[i].status+1)%3;
-  renderAssignments(document.getElementById('global-search').value);
+
+function closePhotoModal(){
+  document.getElementById('photoModal').classList.remove('open');
+  currentEditingMemberId = null;
+}
+
+document.getElementById('photoFileInput').addEventListener('change', function(e){
+  const file = e.target.files[0];
+  if(file){
+    const reader = new FileReader();
+    reader.onload = function(event){
+      document.getElementById('photoPreview').innerHTML = `<img src="${event.target.result}" style="width:100%;height:100%;object-fit:cover;"/>`;
+    };
+    reader.readAsDataURL(file);
+  }
+});
+
+// Drag and drop
+document.getElementById('photoPreview').addEventListener('dragover', (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+});
+
+document.getElementById('photoPreview').addEventListener('drop', (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+  const files = e.dataTransfer.files;
+  if(files.length > 0){
+    document.getElementById('photoFileInput').files = files;
+    const event = new Event('change', { bubbles: true });
+    document.getElementById('photoFileInput').dispatchEvent(event);
+  }
+});
+
+function savePhoto(){
+  const preview = document.getElementById('photoPreview');
+  const img = preview.querySelector('img');
+  if(img && currentEditingMemberId){
+    memberPhotos[currentEditingMemberId] = img.src;
+    localStorage.setItem('memberPhotos', JSON.stringify(memberPhotos));
+    renderMembers(document.getElementById('global-search').value);
+    closePhotoModal();
+  }
 }
 
 let cur='schedule';
@@ -453,11 +507,10 @@ function renderCurrent(q=''){
   if(cur==='schedule')renderSchedule(q);
   else if(cur==='members')renderMembers(q);
   else if(cur==='practicum')renderPracticum(q);
-  else if(cur==='assignments')renderAssignments(q);
 }
 
 document.addEventListener('DOMContentLoaded',()=>{
-  renderSchedule();renderMembers();renderPracticum();renderAssignments();
+  renderSchedule();renderMembers();renderPracticum();
   document.querySelectorAll('.tab-btn,.sb-link').forEach(b=>b.addEventListener('click',()=>switchPanel(b.dataset.panel)));
   document.getElementById('global-search').addEventListener('input',e=>renderCurrent(e.target.value.toLowerCase()));
   const splash=document.getElementById('splash'),app=document.getElementById('app');
@@ -465,6 +518,13 @@ document.addEventListener('DOMContentLoaded',()=>{
     splash.classList.add('hide');
     app.style.opacity='1';
     setTimeout(()=>{splash.style.display='none';},950);
+  });
+  
+  // Close modal when clicking outside
+  document.getElementById('photoModal').addEventListener('click', (e) => {
+    if(e.target.id === 'photoModal'){
+      closePhotoModal();
+    }
   });
 });
 </script>
