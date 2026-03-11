@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Complete English Grammar — Belajar Interaktif</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,600;1,300&display=swap');
+
+  :root {
+    --ink: #1a1209;
+    --paper: #f5f0e8;
+    --cream: #ede6d3;
+    --gold: #c9922a;
+    --gold-light: #e8c06a;
+    --red: #b03a2e;
+    --green: #2e7d56;
+    --blue-ink: #1a3a6b;
+    --muted: #7a6e5f;
+    --border: #c8b89a;
+    --shadow: rgba(26,18,9,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+    background-image: 
+      radial-gradient(circle at 20% 80%, rgba(201,146,42,0.06) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(26,58,107,0.05) 0%, transparent 50%);
+  }
+
+  /* HEADER */
+  header {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 20px var(--shadow);
+  }
+
+  .header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    color: var(--gold-light);
+    flex-shrink: 0;
+  }
+
+  .logo span {
+    color: var(--paper);
+    font-weight: 400;
+    font-size: 0.85rem;
+    display: block;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-family: 'IBM Plex Mono', monospace;
+    margin-top: -4px;
+  }
+
+  .header-tag {
+    background: var(--gold);
+    color: var(--ink);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 500;
+    padding: 3px 8px;
+    border-radius: 2px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-left: auto;
+  }
+
+  /* LAYOUT */
+  .app {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 28px 24px;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  /* SIDEBAR */
+  .sidebar {
+    background: white;
+    border: 1.5px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    position: sticky;
+    top: 80px;
+    max-height: calc(100vh - 100px);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 3px 3px 0 var(--cream);
+  }
+
+  .sidebar-header {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 14px 16px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .sidebar-header::before {
+    content: '§';
+    color: var(--gold-light);
+    font-size: 1rem;
+    font-family: 'Playfair Display', serif;
+  }
+
+  .search-box {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    background: var(--cream);
+  }
+
+  .search-box input {
+    width: 100%;
+    border: 1px solid var(--border);
+    background: white;
+    padding: 6px 10px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.8rem;
+    color: var(--ink);
+    border-radius: 2px;
+    outline: none;
+  }
+
+  .search-box input:focus {
+    border-color: var(--gold);
+  }
+
+  .chapter-list {
+    overflow-y: auto;
+    flex: 1;
+  }
+
+  .chapter-list::-webkit-scrollbar { width: 4px; }
+  .chapter-list::-webkit-scrollbar-track { background: var(--cream); }
+  .chapter-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  .chapter-btn {
+    width: 100%;
+    text-align: left;
+    border: none;
+    background: transparent;
+    padding: 9px 14px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--cream);
+    transition: all 0.15s ease;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-family: inherit;
+  }
+
+  .chapter-btn:hover { background: var(--cream); }
+
+  .chapter-btn.active {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .chapter-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    font-weight: 500;
+    color: var(--gold);
+    flex-shrink: 0;
+    margin-top: 2px;
+    min-width: 28px;
+  }
+
+  .chapter-btn.active .chapter-num { color: var(--gold-light); }
+
+  .chapter-title-text {
+    font-size: 0.78rem;
+    font-weight: 400;
+    line-height: 1.35;
+    color: var(--ink);
+  }
+
+  .chapter-btn.active .chapter-title-text { color: var(--paper); }
+
+  .chapter-subtitle {
+    display: block;
+    font-size: 0.68rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 1px;
+  }
+
+  .chapter-btn.active .chapter-subtitle { color: var(--gold-light); opacity: 0.8; }
+
+  /* MAIN */
+  .main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 0;
+  }
+
+  /* WELCOME */
+  .welcome-card {
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 4px;
+    padding: 32px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .welcome-card::before {
+    content: '"';
+    position: absolute;
+    right: 24px;
+    top: -20px;
+    font-family: 'Playfair Display', serif;
+    font-size: 14rem;
+    color: rgba(255,255,255,0.04);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .welcome-card h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 10px;
+    color: var(--gold-light);
+  }
+
+  .welcome-card p {
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: rgba(245,240,232,0.75);
+    max-width: 520px;
+    line-height: 1.65;
+  }
+
+  .welcome-stats {
+    display: flex;
+    gap: 24px;
+    margin-top: 20px;
+  }
+
+  .stat {
+    text-align: center;
+    border-left: 2px solid rgba(201,146,42,0.4);
+    padding-left: 16px;
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--gold-light);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(245,240,232,0.5);
+    font-family: 'IBM Plex Mono', monospace;
+    margin-top: 3px;
+  }
+
+  /* CHAT PANEL */
+  .chat-panel {
+    background: white;
+    border: 1.5px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 3px 3px 0 var(--cream);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .chat-header {
+    background: var(--cream);
+    border-bottom: 1.5px solid var(--border);
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .chat-header-dot {
+    width: 8px; height: 8px;
+    background: var(--green);
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(46,125,86,0.2);
+  }
+
+  .chat-header-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  .chat-header-sub {
+    font-size: 0.7rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-left: auto;
+  }
+
+  .chat-messages {
+    padding: 20px 18px;
+    min-height: 300px;
+    max-height: 480px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    background: var(--paper);
+    background-image: repeating-linear-gradient(
+      transparent,
+      transparent 27px,
+      rgba(200,184,154,0.25) 28px
+    );
+    background-size: 100% 28px;
+  }
+
+  .chat-messages::-webkit-scrollbar { width: 4px; }
+  .chat-messages::-webkit-scrollbar-track { background: transparent; }
+  .chat-messages::-webkit-scrollbar-thumb { background: var(--border); }
+
+  .msg {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    animation: fadeSlide 0.3s ease both;
+  }
+
+  @keyframes fadeSlide {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .msg-from {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    padding-left: 2px;
+  }
+
+  .msg-bubble {
+    padding: 12px 15px;
+    border-radius: 2px;
+    font-size: 0.88rem;
+    line-height: 1.65;
+    max-width: 88%;
+  }
+
+  .msg.user { align-items: flex-end; }
+  .msg.user .msg-from { color: var(--blue-ink); }
+  .msg.user .msg-bubble {
+    background: var(--blue-ink);
+    color: white;
+    border-bottom-right-radius: 0;
+  }
+
+  .msg.ai .msg-bubble {
+    background: white;
+    color: var(--ink);
+    border: 1px solid var(--border);
+    border-bottom-left-radius: 0;
+  }
+
+  .msg-bubble strong {
+    color: var(--red);
+    font-weight: 600;
+  }
+
+  .msg-bubble em {
+    color: var(--blue-ink);
+    font-style: italic;
+  }
+
+  .msg-bubble code {
+    background: var(--cream);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82em;
+    padding: 1px 5px;
+    border-radius: 2px;
+    color: var(--red);
+  }
+
+  .msg-bubble .example-box {
+    background: var(--cream);
+    border-left: 3px solid var(--gold);
+    padding: 8px 12px;
+    margin: 8px 0 4px;
+    border-radius: 0 2px 2px 0;
+    font-size: 0.85em;
+  }
+
+  .msg-bubble .example-box .en {
+    color: var(--blue-ink);
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  .msg-bubble .example-box .id {
+    color: var(--muted);
+    font-size: 0.92em;
+    margin-top: 2px;
+  }
+
+  .typing-indicator {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 12px 15px;
+    background: white;
+    border: 1px solid var(--border);
+    width: fit-content;
+  }
+
+  .typing-dot {
+    width: 6px; height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: bounce 1s infinite;
+  }
+
+  .typing-dot:nth-child(2) { animation-delay: 0.15s; }
+  .typing-dot:nth-child(3) { animation-delay: 0.3s; }
+
+  @keyframes bounce {
+    0%, 60%, 100% { transform: translateY(0); }
+    30% { transform: translateY(-5px); }
+  }
+
+  /* QUICK ACTIONS */
+  .quick-actions {
+    padding: 10px 18px;
+    background: var(--cream);
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .quick-btn {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.75rem;
+    border: 1px solid var(--border);
+    background: white;
+    color: var(--ink);
+    padding: 5px 12px;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.15s ease;
+    font-weight: 400;
+  }
+
+  .quick-btn:hover {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+
+  /* INPUT */
+  .chat-input-area {
+    padding: 14px 18px;
+    border-top: 1.5px solid var(--border);
+    background: white;
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+  }
+
+  .chat-input-area textarea {
+    flex: 1;
+    border: 1.5px solid var(--border);
+    background: var(--paper);
+    padding: 10px 13px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.88rem;
+    color: var(--ink);
+    border-radius: 2px;
+    resize: none;
+    min-height: 44px;
+    max-height: 130px;
+    outline: none;
+    line-height: 1.5;
+    transition: border-color 0.15s ease;
+    overflow-y: auto;
+  }
+
+  .chat-input-area textarea:focus { border-color: var(--gold); }
+  .chat-input-area textarea::placeholder { color: var(--muted); font-style: italic; }
+
+  .send-btn {
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    padding: 10px 18px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.15s ease;
+    flex-shrink: 0;
+    height: 44px;
+  }
+
+  .send-btn:hover { background: var(--gold); color: var(--ink); }
+  .send-btn:disabled { background: var(--border); color: var(--muted); cursor: not-allowed; }
+
+  /* CHAPTER INFO */
+  .chapter-info-bar {
+    background: var(--cream);
+    border: 1.5px solid var(--border);
+    border-radius: 4px;
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    box-shadow: 2px 2px 0 rgba(200,184,154,0.5);
+  }
+
+  .chapter-badge {
+    background: var(--ink);
+    color: var(--gold-light);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 500;
+    padding: 4px 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .chapter-info-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .chapter-info-sub {
+    font-size: 0.75rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  .nav-btns {
+    margin-left: auto;
+    display: flex;
+    gap: 6px;
+  }
+
+  .nav-btn {
+    border: 1px solid var(--border);
+    background: white;
+    color: var(--ink);
+    padding: 5px 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.15s ease;
+  }
+
+  .nav-btn:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .nav-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  .nav-btn:disabled:hover { background: white; color: var(--ink); border-color: var(--border); }
+
+  /* HIDDEN */
+  .hidden { display: none; }
+
+  /* RESPONSIVE */
+  @media (max-width: 700px) {
+    .app {
+      grid-template-columns: 1fr;
+      padding: 16px 12px;
+    }
+    .sidebar {
+      position: static;
+      max-height: 250px;
+    }
+    .welcome-card h1 { font-size: 1.5rem; }
+    .welcome-stats { gap: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      Complete English Grammar
+      <span>Buku Dr. H. Pauzan — Belajar Interaktif</span>
+    </div>
+    <div class="header-tag">AI Tutor</div>
+  </div>
+</header>
+
+<div class="app">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-header">Daftar Bab (120 Bab)</div>
+    <div class="search-box">
+      <input type="text" id="search-input" placeholder="Cari bab..." oninput="filterChapters()">
+    </div>
+    <div class="chapter-list" id="chapter-list"></div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="welcome-card" id="welcome-card">
+      <h1>Selamat Belajar!</h1>
+      <p>Pilih bab dari daftar kiri, lalu tanyakan apa saja — minta penjelasan, contoh, latihan soal, atau terjemahan. AI Tutor ini menggunakan buku <em>Complete English Grammar</em> karya Dr. H. Pauzan sebagai referensi utama.</p>
+      <div class="welcome-stats">
+        <div class="stat"><div class="stat-num">120</div><div class="stat-label">Bab</div></div>
+        <div class="stat"><div class="stat-num">1.092</div><div class="stat-label">Halaman</div></div>
+        <div class="stat"><div class="stat-num">∞</div><div class="stat-label">Pertanyaan</div></div>
+      </div>
+    </div>
+
+    <div class="chapter-info-bar hidden" id="chapter-info-bar">
+      <div class="chapter-badge" id="chapter-badge">BAB 1</div>
+      <div>
+        <div class="chapter-info-title" id="chapter-info-title">—</div>
+        <div class="chapter-info-sub" id="chapter-info-sub">—</div>
+      </div>
+      <div class="nav-btns">
+        <button class="nav-btn" id="prev-btn" onclick="navigateChapter(-1)">← Sebelumnya</button>
+        <button class="nav-btn" id="next-btn" onclick="navigateChapter(1)">Selanjutnya →</button>
+      </div>
+    </div>
+
+    <div class="chat-panel">
+      <div class="chat-header">
+        <div class="chat-header-dot"></div>
+        <div class="chat-header-title">AI Grammar Tutor</div>
+        <div class="chat-header-sub" id="chat-header-sub">Pilih bab untuk mulai</div>
+      </div>
+
+      <div class="chat-messages" id="chat-messages">
+        <div class="msg ai">
+          <div class="msg-from">Tutor</div>
+          <div class="msg-bubble">
+            Halo! 👋 Aku adalah AI Tutor yang siap membantu kamu belajar English Grammar dari buku <strong>Complete English Grammar</strong> karya Dr. H. Pauzan.<br><br>
+            Pilih bab di sebelah kiri, atau langsung ketik pertanyaanmu. Kamu bisa minta:<br>
+            &bull; Penjelasan materi suatu bab<br>
+            &bull; Contoh kalimat tambahan<br>
+            &bull; Latihan soal / kuis<br>
+            &bull; Perbedaan antara dua konsep<br>
+            &bull; Terjemahan dan analisis kalimat<br><br>
+            Mau mulai dari mana? 😊
+          </div>
+        </div>
+      </div>
+
+      <div class="quick-actions" id="quick-actions">
+        <button class="quick-btn" onclick="sendQuick('Jelaskan materi bab ini secara lengkap')">📖 Jelaskan Bab Ini</button>
+        <button class="quick-btn" onclick="sendQuick('Berikan 5 contoh kalimat dengan terjemahannya')">✏️ Contoh Kalimat</button>
+        <button class="quick-btn" onclick="sendQuick('Buat 5 soal latihan pilihan ganda untuk bab ini')">🧪 Soal Latihan</button>
+        <button class="quick-btn" onclick="sendQuick('Apa poin-poin penting yang harus diingat dari bab ini?')">⭐ Poin Penting</button>
+        <button class="quick-btn" onclick="sendQuick('Apa kesalahan umum yang sering dilakukan dalam bab ini?')">⚠️ Kesalahan Umum</button>
+      </div>
+
+      <div class="chat-input-area">
+        <textarea id="user-input" placeholder="Tanya apa saja tentang grammar..." rows="1"
+          onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+        <button class="send-btn" id="send-btn" onclick="sendMessage()">Kirim</button>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+const chapters = [
+  {n:1, en:"Word, Phrase, Clause, and Sentence", id:"Kata, Frase, Klausa, dan Kalimat", page:10},
+  {n:2, en:"To Be", id:"Ada, Adalah", page:37},
+  {n:3, en:"Gerunds", id:"Kata Kerja sebagai Kata Benda", page:54},
+  {n:4, en:"Tag Questions", id:"Pernyataan dengan Akhiran Tanya", page:71},
+  {n:5, en:"Article", id:"Kata Sandang", page:84},
+  {n:6, en:"Verbal and Nominal Sentences", id:"Kalimat Verbal dan Nominal", page:133},
+  {n:7, en:"Tenses", id:"Bentuk-Bentuk Waktu", page:145},
+  {n:8, en:"Direct and Indirect Speech", id:"Kalimat Langsung dan Tidak Langsung", page:227},
+  {n:9, en:"Active and Passive Voices", id:"Bentuk Aktif dan Pasif", page:244},
+  {n:10, en:"Elliptical Construction", id:"Susunan Eliptik", page:265},
+  {n:11, en:"Subjunctive - 1", id:"Bentuk Pengandaian-1", page:270},
+  {n:12, en:"Contractions", id:"Singkatan", page:274},
+  {n:13, en:"Foreign Plural Nouns", id:"Kata Benda Jamak Asing", page:277},
+  {n:14, en:"Many, Much, and a Lot of", id:"Banyak", page:283},
+  {n:15, en:"Few, a Few, Little and a Little", id:"Sedikit dan Beberapa", page:290},
+  {n:16, en:"The Two Uses of Adjectives", id:"Dua Cara Pemakaian Kata Sifat", page:294},
+  {n:17, en:"Substitutes for Adjectives", id:"Pengganti untuk Kata Sifat", page:297},
+  {n:18, en:"Numerals", id:"Bilangan-bilangan", page:300},
+  {n:19, en:"Some and Any", id:"Beberapa dan Sedikit", page:309},
+  {n:20, en:"The Degrees of Comparison", id:"Tingkat Perbandingan", page:314},
+  {n:21, en:"Adjectives used as Nouns", id:"Kata Sifat sebagai Kata Benda", page:332},
+  {n:22, en:"Every, Each, One/Ones, All, Both, None, Else", id:"Setiap, Masing-masing, dll", page:342},
+  {n:23, en:"Shall, Should, Will, Would, Do, Did, Can, Could, etc.", id:"Modal Verbs", page:351},
+  {n:24, en:"Conjugation of Verbs: Regular and Irregular", id:"Konjugasi Kata Kerja", page:360},
+  {n:25, en:"What Colour", id:"Warna Apa", page:368},
+  {n:26, en:"This/These, That/Those", id:"Ini, Itu", page:371},
+  {n:27, en:"There", id:"Ada", page:376},
+  {n:28, en:"Or, And, But", id:"Atau, Dan, Tetapi", page:379},
+  {n:29, en:"How Many, How Much", id:"Berapa Banyak", page:383},
+  {n:30, en:"Mathematical Term", id:"Istilah Matematika", page:385},
+  {n:31, en:"Want to, Like to, Have to + Verb", id:"Ingin, Suka, Harus", page:397},
+  {n:32, en:"Prepositional Phrase without Article", id:"Frase Kata Depan tanpa Kata Sandang", page:401},
+  {n:33, en:"Object Form of Personal Pronoun", id:"Bentuk Obyek Kata Ganti Orang", page:403},
+  {n:34, en:"Descriptive Adjective", id:"Kata Sifat Deskriptif", page:408},
+  {n:35, en:"Possessive Pronoun", id:"Kata Ganti Posesif", page:415},
+  {n:36, en:"It + Adverb of Definite Time", id:"It + Kata Keterangan Waktu", page:418},
+  {n:37, en:"Was, Were", id:"Ada/Adalah (Lampau)", page:428},
+  {n:38, en:"Miscellaneous Words and Phrases", id:"Bermacam-macam Kata dan Frase", page:431},
+  {n:39, en:"How", id:"Berapa/Bagaimana", page:443},
+  {n:40, en:"Why, Because", id:"Mengapa, Karena", page:449},
+  {n:41, en:"Coordinate and Subordinate Clauses", id:"Klausa Sederajat dan Anak Kalimat", page:453},
+  {n:42, en:"Verb + Adjective", id:"Kata Kerja + Kata Sifat", page:455},
+  {n:43, en:"Verb + Verb in Ing Form", id:"Kata Kerja + Kata Kerja Bentuk Ing", page:457},
+  {n:44, en:"Used to and Be Used to", id:"Kebiasaan Dulu dan Terbiasa", page:459},
+  {n:45, en:"Command, Request, and Offering", id:"Perintah, Permintaan, dan Tawaran", page:463},
+  {n:46, en:"Prepositional Phrases", id:"Frase Kata Depan", page:466},
+  {n:47, en:"Capital Letters", id:"Huruf Kapital", page:472},
+  {n:48, en:"Both, Either, Neither", id:"Kedua-duanya, Salah Satu, Tidak Keduanya", page:475},
+  {n:49, en:"Other, Others, Each Other, One Another", id:"Yang Lain, Saling/Satu Sama Lain", page:478},
+  {n:50, en:"Because of, in Spite of, Regardless of", id:"Karena, Meskipun, Bagaimanapun", page:485},
+  {n:51, en:"Must Have, Might Have, Should Have, Could Have", id:"Pasti/Mungkin/Seharusnya Telah", page:487},
+  {n:52, en:"Preposition and Particle in Sentences", id:"Preposisi dan Partikel", page:493},
+  {n:53, en:"Adverbials of Purpose", id:"Adverbia Tujuan", page:496},
+  {n:54, en:"The Use of To + a Verb", id:"Penggunaan To + Kata Kerja", page:499},
+  {n:55, en:"Past Participles as Modifiers", id:"Partisip Masa Lalu sebagai Modifier", page:501},
+  {n:56, en:"Verb in Ing Form as Noun Phrases", id:"Kata Kerja Ing sebagai Frase Kata Benda", page:503},
+  {n:57, en:"To + Verb with WH-Expression", id:"To + Kata Kerja dengan Ekspresi WH", page:506},
+  {n:58, en:"Embedded Statements and WH-Clauses", id:"Pernyataan dan Klausa-WH", page:508},
+  {n:59, en:"Relative Clauses", id:"Klausa Relatif", page:516},
+  {n:60, en:"For, During, When, While", id:"Selama, Pada Waktu, Ketika", page:522},
+  {n:61, en:"Adjective with Preposition Combination", id:"Kata Sifat + Kata Depan", page:525},
+  {n:62, en:"So That and Such That", id:"Sehingga / Sedemikian Hingga", page:527},
+  {n:63, en:"Noun/Adjective/Noun as Complement after Direct Object", id:"Pelengkap setelah Obyek Langsung", page:529},
+  {n:64, en:"Summary Statements", id:"Pernyataan-Pernyataan Ringkas", page:533},
+  {n:65, en:"Wish Sentences in the Past", id:"Kalimat Wish dalam Waktu Lampau", page:535},
+  {n:66, en:"Noun Phrase + Modifier", id:"Frase Kata Benda + Modifier", page:539},
+  {n:67, en:"Adverb of Manner", id:"Kata Keterangan Cara", page:541},
+  {n:68, en:"Using One as Substitute for a Noun", id:"One sebagai Pengganti Kata Benda", page:543},
+  {n:69, en:"Single-Word Adverbs of Frequency", id:"Kata Keterangan Frekuensi", page:545},
+  {n:70, en:"Using Adjective and Noun to Modify Noun", id:"Kata Sifat dan Kata Benda memodifikasi", page:548},
+  {n:71, en:"Moods", id:"Modus", page:550},
+  {n:72, en:"The Participles", id:"Partisip", page:554},
+  {n:73, en:"Subject-Verb Agreement", id:"Persesuaian Kata Kerja dengan Subjek", page:560},
+  {n:74, en:"Conditional Sentences", id:"Kalimat Kondisional/Bersyarat", page:567},
+  {n:75, en:"Transformation of Sentences", id:"Perubahan Bentuk Kalimat", page:571},
+  {n:76, en:"Synthesis of Sentences", id:"Penggabungan Kalimat", page:576},
+  {n:77, en:"Punctuation", id:"Tanda Baca", page:581},
+  {n:78, en:"Phrasal Verbs and Idioms", id:"Kata Kerja dan Idiom Frase", page:592},
+  {n:79, en:"Sequences of Tense", id:"Urutan Bentuk Kata Kerja menurut Waktu", page:608},
+  {n:80, en:"Syntax", id:"Sintaksis", page:611},
+  {n:81, en:"Relation Adjective with Adverb", id:"Hubungan Kata Sifat dengan Kata Keterangan", page:634},
+  {n:82, en:"Question Words", id:"Kata-kata Tanya", page:641},
+  {n:83, en:"Apposition", id:"Aposisi", page:646},
+  {n:84, en:"Causative", id:"Kausatif", page:648},
+  {n:85, en:"Prepositional Collocation", id:"Kolokasi berpreposisi", page:651},
+  {n:86, en:"Preference", id:"Preferensi/Pilihan", page:664},
+  {n:87, en:"Parallelism", id:"Kesejajaran", page:669},
+  {n:88, en:"Cleft Sentences and Inversion", id:"Kalimat Terbagi dan Inversi", page:675},
+  {n:89, en:"Imperative and Interrogative Sentences", id:"Kalimat Perintah dan Tanya", page:681},
+  {n:90, en:"Noun, Adjective, and Adverb Clauses", id:"Anak Kalimat Kata Benda, Sifat, Keterangan", page:690},
+  {n:91, en:"Shortened Forms of Adjective/Adverbial Clauses", id:"Bentuk Pendek Klausa Adjektival/Adverbial", page:700},
+  {n:92, en:"Derivation and Modifiers", id:"Asal Mula dan Modifier", page:706},
+  {n:93, en:"Noun and Verb Phrases", id:"Frase Kata Benda dan Kata Kerja", page:710},
+  {n:94, en:"Formal and Informal Register", id:"Laras Bahasa Formal dan Informal", page:716},
+  {n:95, en:"Affix: Prefix and Suffix", id:"Imbuhan: Awalan dan Akhiran", page:719},
+  {n:96, en:"Syllables and Morphemes", id:"Suku Kata dan Morfem", page:729},
+  {n:97, en:"American English vs British English", id:"Perbedaan Bahasa Inggris Amerika dan Inggris", page:733},
+  {n:98, en:"Confused Verbs", id:"Kata Kerja yang Membingungkan", page:741},
+  {n:99, en:"Idioms and Slangs", id:"Idiom dan Slang", page:743},
+  {n:100, en:"Word Order", id:"Urutan Kata", page:750},
+  {n:101, en:"Present and Past Participle Forms", id:"Bentuk Partisip Aktif dan Pasif", page:754},
+  {n:102, en:"Positive, Negative, and Interrogative Sentences", id:"Kalimat Positif, Negatif, Interogatif", page:760},
+  {n:103, en:"Expletive", id:"Kata Pengisi", page:767},
+  {n:104, en:"To Be + Going to (Future Tense)", id:"Akan (Waktu yang Akan Datang)", page:771},
+  {n:105, en:"Verb and Direct/Indirect Objects", id:"Kata Kerja dan Obyek Langsung/Tak Langsung", page:773},
+  {n:106, en:"Statement Connected with And...Too, Either, But", id:"Pernyataan dengan ...Too, Either, But", page:777},
+  {n:107, en:"Types of Sentences", id:"Jenis-jenis Kalimat", page:781},
+  {n:108, en:"Subjunctive - 2", id:"Bentuk Pengandaian-2", page:784},
+  {n:109, en:"The Use of the One and the Ones", id:"Penggunaan the One dan the Ones", page:786},
+  {n:110, en:"Noun-Noun Joined Together", id:"Kata Benda digabung Bersama", page:787},
+  {n:111, en:"Determiners", id:"Kata Penjelas/Penentu", page:790},
+  {n:112, en:"Adjective Phrase", id:"Frase Kata Sifat", page:795},
+  {n:113, en:"Noun", id:"Kata Benda", page:798},
+  {n:114, en:"Pronoun", id:"Kata Ganti", page:850},
+  {n:115, en:"Adjective", id:"Kata Sifat", page:876},
+  {n:116, en:"Adverb", id:"Kata Keterangan", page:923},
+  {n:117, en:"Verb", id:"Kata Kerja", page:963},
+  {n:118, en:"Preposition", id:"Kata Depan", page:1023},
+  {n:119, en:"Conjunction", id:"Kata Penghubung", page:1065},
+  {n:120, en:"Interjection", id:"Kata Seru", page:1078},
+];
+
+let currentChapter = null;
+let conversationHistory = [];
+let isLoading = false;
+
+// Render chapters
+function renderChapters(list) {
+  const el = document.getElementById('chapter-list');
+  el.innerHTML = list.map(c => `
+    <button class="chapter-btn ${currentChapter && currentChapter.n === c.n ? 'active' : ''}" onclick="selectChapter(${c.n})">
+      <span class="chapter-num">BAB ${c.n}</span>
+      <span class="chapter-title-text">${c.en}<span class="chapter-subtitle">${c.id}</span></span>
+    </button>
+  `).join('');
+}
+
+function filterChapters() {
+  const q = document.getElementById('search-input').value.toLowerCase();
+  const filtered = chapters.filter(c =>
+    c.en.toLowerCase().includes(q) ||
+    c.id.toLowerCase().includes(q) ||
+    String(c.n).includes(q)
+  );
+  renderChapters(filtered);
+}
+
+function selectChapter(n) {
+  currentChapter = chapters.find(c => c.n === n);
+  renderChapters(chapters); // re-render full list to update active state
+  filterChapters(); // apply current filter
+
+  // Update UI
+  document.getElementById('welcome-card').classList.add('hidden');
+  const bar = document.getElementById('chapter-info-bar');
+  bar.classList.remove('hidden');
+  document.getElementById('chapter-badge').textContent = `BAB ${n}`;
+  document.getElementById('chapter-info-title').textContent = currentChapter.en;
+  document.getElementById('chapter-info-sub').textContent = `${currentChapter.id} · Hal. ${currentChapter.page}`;
+  document.getElementById('chat-header-sub').textContent = `BAB ${n}: ${currentChapter.en}`;
+
+  document.getElementById('prev-btn').disabled = n <= 1;
+  document.getElementById('next-btn').disabled = n >= 120;
+
+  // Reset conversation for this chapter
+  conversationHistory = [];
+
+  const msgs = document.getElementById('chat-messages');
+  msgs.innerHTML = '';
+  addMsg('ai', `Kamu memilih <strong>BAB ${n}: ${currentChapter.en}</strong> <em>(${currentChapter.id})</em>, halaman ${currentChapter.page}.<br><br>Mau mulai dengan apa? Kamu bisa minta penjelasan lengkap, contoh kalimat, soal latihan, atau tanya langsung konsep yang ingin dipahami!`);
+
+  document.getElementById('user-input').focus();
+}
+
+function navigateChapter(dir) {
+  if (!currentChapter) return;
+  const newN = currentChapter.n + dir;
+  if (newN >= 1 && newN <= 120) selectChapter(newN);
+}
+
+function addMsg(role, html) {
+  const msgs = document.getElementById('chat-messages');
+  const div = document.createElement('div');
+  div.className = `msg ${role}`;
+  div.innerHTML = `
+    <div class="msg-from">${role === 'user' ? 'Kamu' : 'Tutor'}</div>
+    <div class="msg-bubble">${html}</div>
+  `;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function addTyping() {
+  const msgs = document.getElementById('chat-messages');
+  const div = document.createElement('div');
+  div.className = 'msg ai';
+  div.id = 'typing-msg';
+  div.innerHTML = `
+    <div class="msg-from">Tutor</div>
+    <div class="typing-indicator">
+      <div class="typing-dot"></div>
+      <div class="typing-dot"></div>
+      <div class="typing-dot"></div>
+    </div>
+  `;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function removeTyping() {
+  const t = document.getElementById('typing-msg');
+  if (t) t.remove();
+}
+
+function sendQuick(text) {
+  document.getElementById('user-input').value = text;
+  sendMessage();
+}
+
+function handleKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendMessage();
+  }
+}
+
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 130) + 'px';
+}
+
+async function sendMessage() {
+  if (isLoading) return;
+  const input = document.getElementById('user-input');
+  const text = input.value.trim();
+  if (!text) return;
+
+  input.value = '';
+  input.style.height = 'auto';
+  isLoading = true;
+  document.getElementById('send-btn').disabled = true;
+
+  addMsg('user', escapeHtml(text));
+
+  const chapterContext = currentChapter
+    ? `Kita sedang mempelajari BAB ${currentChapter.n}: "${currentChapter.en}" (${currentChapter.id}), halaman ${currentChapter.page} dari buku "Complete English Grammar" karya Dr. H. Pauzan.`
+    : 'Kita sedang belajar grammar bahasa Inggris dari buku "Complete English Grammar" karya Dr. H. Pauzan (1092 halaman, 120 bab).';
+
+  const systemPrompt = `Kamu adalah AI Tutor untuk pelajaran grammar bahasa Inggris. Referensi utamamu adalah buku "Complete English Grammar" (Tata Bahasa Inggris Lengkap) karya Dr. H. Pauzan, M.Pd., terbitan PT Cipta Gadhing Artha, 2021, ISBN 978-623-6518-68-7. Buku ini memiliki 120 bab dan 1.092 halaman.
+
+${chapterContext}
+
+Panduan menjawab:
+- Jelaskan secara lengkap, tidak dipersingkat, dengan contoh-contoh yang banyak
+- Gunakan bahasa Indonesia campur Inggris (bilingual) yang mudah dipahami
+- Sertakan contoh kalimat bahasa Inggris beserta terjemahan Indonesianya
+- Gunakan format: untuk contoh kalimat, tulis bahasa Inggris dulu lalu terjemahannya
+- Jika ada rumus/pola grammar, tuliskan dengan jelas
+- Kalau ada pertanyaan di luar buku, tetap jawab dengan baik menggunakan pengetahuan grammar umum
+- Bersikap ramah dan semangat membantu
+- Gunakan HTML sederhana untuk formatting: <strong> untuk istilah penting, <em> untuk bahasa Inggris, <br> untuk baris baru
+- Untuk contoh kalimat, format: <div class="example-box"><div class="en">• [kalimat Inggris]</div><div class="id">[terjemahan Indonesia]</div></div>`;
+
+  conversationHistory.push({ role: 'user', content: text });
+
+  addTyping();
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: systemPrompt,
+        messages: conversationHistory
+      })
+    });
+
+    const data = await response.json();
+    removeTyping();
+
+    if (data.content && data.content[0]) {
+      const reply = data.content[0].text;
+      conversationHistory.push({ role: 'assistant', content: reply });
+      addMsg('ai', reply);
+    } else {
+      addMsg('ai', 'Maaf, ada error. Coba lagi ya! 🙏');
+    }
+  } catch (err) {
+    removeTyping();
+    addMsg('ai', `Maaf, terjadi error: <code>${err.message}</code>. Pastikan koneksimu stabil dan coba lagi.`);
+  }
+
+  isLoading = false;
+  document.getElementById('send-btn').disabled = false;
+  input.focus();
+}
+
+function escapeHtml(text) {
+  return text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
+}
+
+// Init
+renderChapters(chapters);
+</script>
+</body>
+</html>
